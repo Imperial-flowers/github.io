@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial | Студія флористики</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Навігація -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">IMPERIAL</div>
+            <nav class="nav-links">
+                <a href="#catalog"><span class="icon">💐</span> Каталог</a>
+                <a href="#contacts"><span class="icon">📞</span> Контакти</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Головна секція -->
+    <section class="hero">
+        <!-- Decorative floating flowers -->
+        <div class="hero-decorations">
+            <span class="petal">🌸</span>
+            <span class="petal">🌺</span>
+            <span class="petal">🌷</span>
+            <span class="petal">🌼</span>
+            <span class="petal">🌹</span>
+            <span class="petal">💐</span>
+        </div>
+        <div class="hero-text">
+            <h1>Ексклюзивні квіти для ваших особливих моментів</h1>
+            <p>Кожен букет — це витвір мистецтва, створений з любов'ю та увагою до найменших деталей.</p>
+            <a href="#catalog" class="btn primary-btn">Переглянути букети</a>
+        </div>
+    </section>
+
+    <!-- Каталог -->
+    <section id="catalog" class="catalog container">
+        <h2 class="section-title">Наші композиції</h2>
+        <p class="section-subtitle">✦ ручна робота · свіжі квіти · доставка ✦</p>
+        <div class="flowers-grid">
+
+            <div class="flower-card">
+                <div class="flower-image"><img src="images/1.jpg" alt="Червона романтика"></div>
+                <div class="flower-info">
+                    <h3>Червона романтика</h3>
+                    <p class="description">Класичні червоні троянди з витонченим доповненням.</p>
+                    <div class="btn-group">
+                        <button class="order-btn" onclick="orderBouquet('Червона романтика')">Дізнатись ціну</button>
+                        <button class="reserve-btn" onclick="reserveBouquet('Червона романтика')">Забронювати</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flower-card">
+                <div class="flower-image"><img src="images/2.jpg" alt="Ніжність"></div>
+                <div class="flower-info">
+                    <h3>Ніжність</h3>
+                    <p class="description">Кремові троянди в поєднанні з легкою гіпсофілою.</p>
+                    <div class="btn-group">
+                        <button class="order-btn" onclick="orderBouquet('Ніжність')">Дізнатись ціну</button>
+                        <button class="reserve-btn" onclick="reserveBouquet('Ніжність')">Забронювати</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flower-card">
+                <div class="flower-image"><img src="images/3.jpg" alt="Білосніжна розкіш"></div>
+                <div class="flower-info">
+                    <h3>Білосніжна розкіш</h3>
+                    <p class="description">Елегантний букет з білих троянд для особливих випадків.</p>
+                    <div class="btn-group">
+                        <button class="order-btn" onclick="orderBouquet('Білосніжна розкіш')">Дізнатись ціну</button>
+                        <button class="reserve-btn" onclick="reserveBouquet('Білосніжна розкіш')">Забронювати</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flower-card">
+                <div class="flower-image"><img src="images/4.jpg" alt="Рожева мрія"></div>
+                <div class="flower-info">
+                    <h3>Рожева мрія</h3>
+                    <p class="description">Пишний рожевий букет, що дарує радість.</p>
+                    <div class="btn-group">
+                        <button class="order-btn" onclick="orderBouquet('Рожева мрія')">Дізнатись ціну</button>
+                        <button class="reserve-btn" onclick="reserveBouquet('Рожева мрія')">Забронювати</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flower-card">
+                <div class="flower-image"><img src="images/5.jpg" alt="Яскравий мікс"></div>
+                <div class="flower-info">
+                    <h3>Яскравий мікс</h3>
+                    <p class="description">Контрастне поєднання червоних, білих та зелених відтінків.</p>
+                    <div class="btn-group">
+                        <button class="order-btn" onclick="orderBouquet('Яскравий мікс')">Дізнатись ціну</button>
+                        <button class="reserve-btn" onclick="reserveBouquet('Яскравий мікс')">Забронювати</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flower-card">
+                <div class="flower-image"><img src="images/6.jpg" alt="Елегантна класика"></div>
+                <div class="flower-info">
+                    <h3>Елегантна класика</h3>
+                    <p class="description">Вишукана композиція, яка підкреслює найщиріші почуття.</p>
+                    <div class="btn-group">
+                        <button class="order-btn" onclick="orderBouquet('Елегантна класика')">Дізнатись ціну</button>
+                        <button class="reserve-btn" onclick="reserveBouquet('Елегантна класика')">Забронювати</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flower-card">
+                <div class="flower-image"><img src="images/7.jpg" alt="Весняний настрій"></div>
+                <div class="flower-info">
+                    <h3>Весняний настрій</h3>
+                    <p class="description">Свіжий подих весни у неймовірно гармонійному поєднанні квітів.</p>
+                    <div class="btn-group">
+                        <button class="order-btn" onclick="orderBouquet('Весняний настрій')">Дізнатись ціну</button>
+                        <button class="reserve-btn" onclick="reserveBouquet('Весняний настрій')">Забронювати</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flower-card">
+                <div class="flower-image"><img src="images/8.jpg" alt="Чарівність моменту"></div>
+                <div class="flower-info">
+                    <h3>Чарівність моменту</h3>
+                    <p class="description">Яскравий та розкішний букет, створений для приємних здивувань.</p>
+                    <div class="btn-group">
+                        <button class="order-btn" onclick="orderBouquet('Чарівність моменту')">Дізнатись ціну</button>
+                        <button class="reserve-btn" onclick="reserveBouquet('Чарівність моменту')">Забронювати</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flower-card">
+                <div class="flower-image"><img src="images/9.jpg" alt="Королівський шарм"></div>
+                <div class="flower-info">
+                    <h3>Королівський шарм</h3>
+                    <p class="description">Преміальний букет з особливими акцентами та любов'ю до деталей.</p>
+                    <div class="btn-group">
+                        <button class="order-btn" onclick="orderBouquet('Королівський шарм')">Дізнатись ціну</button>
+                        <button class="reserve-btn" onclick="reserveBouquet('Королівський шарм')">Забронювати</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Модальне вікно для бронювання -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Оформлення замовлення</h2>
+            <p id="modalBouquetName" class="modal-bouquet-name"></p>
+
+            <span class="messenger-label">Оберіть месенджер для зв'язку:</span>
+            <div class="messenger-grid">
+                <button class="messenger-btn active" data-platform="telegram" onclick="selectMessenger('telegram')">
+                    <span class="m-icon">✈️</span>
+                    Telegram
+                </button>
+                <button class="messenger-btn" data-platform="whatsapp" onclick="selectMessenger('whatsapp')">
+                    <span class="m-icon">💬</span>
+                    WhatsApp
+                </button>
+                <button class="messenger-btn" data-platform="viber" onclick="selectMessenger('viber')">
+                    <span class="m-icon">📱</span>
+                    Viber
+                </button>
+                <button class="messenger-btn" data-platform="instagram" onclick="selectMessenger('instagram')">
+                    <span class="m-icon">📸</span>
+                    Instagram
+                </button>
+            </div>
+
+            <!-- Підказка для Viber / Instagram -->
+            <div id="copyHint" style="display:none;" class="copy-hint">
+                <span class="copy-hint-icon">📋</span>
+                <div class="copy-hint-text">
+                    <strong>Текст буде скопійовано автоматично.</strong>
+                    <span id="copyHintDetail"></span>
+                </div>
+            </div>
+
+            <div class="form-group" id="dateGroup">
+                <label for="bookingDate">Оберіть бажану дату:</label>
+                <input type="date" id="bookingDate">
+            </div>
+
+            <button class="btn primary-btn" id="confirmBtn" onclick="confirmBooking()">Перейти до месенджера</button>
+        </div>
+    </div>
+
+    <!-- Контакти -->
+    <section id="contacts" class="contacts">
+        <div class="container contact-content">
+            <h2>Зв'язатися з нами</h2>
+            <p>Щоб дізнатися актуальну ціну або зробити замовлення, напишіть нам у зручному для вас месенджері:</p>
+
+            <div class="contact-links">
+                <a href="javascript:void(0)" onclick="openContact('telegram', '+380970938241')" class="contact-item">
+                    <span class="icon">✈️</span>
+                    <span>Telegram: +380970938241</span>
+                </a>
+                <a href="javascript:void(0)" onclick="openContact('whatsapp', '+380970938241')" class="contact-item">
+                    <span class="icon">💬</span>
+                    <span>WhatsApp: +380970938241</span>
+                </a>
+                <a href="javascript:void(0)" onclick="openContact('viber', '+380970938241')" class="contact-item">
+                    <span class="icon">📱</span>
+                    <span>Viber: +380970938241</span>
+                </a>
+                <a href="https://ig.me/m/kvi_tka24" target="_blank" class="contact-item">
+                    <span class="icon">📸</span>
+                    <span>Instagram: @kvi_tka24</span>
+                </a>
+            </div>
+            <p class="footer-note">Ви також можете уточнити всі деталі за номерами телефонів вказаними вище.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Imperial. Усі права захищені.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
