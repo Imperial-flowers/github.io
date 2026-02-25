@@ -618,3 +618,32 @@ footer {
     position: relative;
     z-index: 1;
 }
+
+/* ── Section decorative flowers ── */
+.section-flowers {
+    position: relative;
+    height: 0;
+    pointer-events: none;
+}
+
+.sf-left,
+.sf-right {
+    position: absolute;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    opacity: 0.5;
+    animation: floatPetal 12s ease-in-out infinite;
+    line-height: 1;
+}
+
+/* Catalog section flowers */
+.sf-l1 { font-size: 80px; left: 2%;   top: -20px; animation-delay: 0s;   animation-duration: 13s; }
+.sf-l2 { font-size: 65px; left: 8%;   top: 60px;  animation-delay: 2s;   animation-duration: 11s; }
+.sf-r1 { font-size: 75px; right: 3%;  top: -10px; animation-delay: 1s;   animation-duration: 14s; }
+.sf-r2 { font-size: 70px; right: 9%;  top: 70px;  animation-delay: 3s;   animation-duration: 12s; }
+
+@media (max-width: 768px) {
+    .sf-l1 { font-size: 50px; left: 1%; }
+    .sf-l2 { font-size: 42px; left: 3%; }
+    .sf-r1 { font-size: 48px; right: 1%; }
+    .sf-r2 { font-size: 44px; right: 3%; }
+}
