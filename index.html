@@ -34,6 +34,10 @@
             <nav class="nav-links">
                 <a href="#catalog"><span class="icon">💐</span> Каталог</a>
                 <a href="#contacts"><span class="icon">📞</span> Контакти</a>
+                <button class="cart-btn" onclick="toggleCart()">
+                    <span class="cart-icon">🛒</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -68,7 +72,7 @@
                     <h3>Червона романтика</h3>
                     <p class="description">Класичні червоні троянди з витонченим доповненням.</p>
                     <div class="btn-group">
-                        <button class="order-btn" onclick="orderBouquet('Червона романтика')">Дізнатись ціну</button>
+                        <button class="add-cart-btn" onclick="addToCart('Червона романтика')">🛒 В кошик</button>
                         <button class="reserve-btn" onclick="reserveBouquet('Червона романтика')">Забронювати</button>
                     </div>
                 </div>
@@ -80,7 +84,7 @@
                     <h3>Ніжність</h3>
                     <p class="description">Кремові троянди в поєднанні з легкою гіпсофілою.</p>
                     <div class="btn-group">
-                        <button class="order-btn" onclick="orderBouquet('Ніжність')">Дізнатись ціну</button>
+                        <button class="add-cart-btn" onclick="addToCart('Ніжність')">🛒 В кошик</button>
                         <button class="reserve-btn" onclick="reserveBouquet('Ніжність')">Забронювати</button>
                     </div>
                 </div>
@@ -92,7 +96,7 @@
                     <h3>Білосніжна розкіш</h3>
                     <p class="description">Елегантний букет з білих троянд для особливих випадків.</p>
                     <div class="btn-group">
-                        <button class="order-btn" onclick="orderBouquet('Білосніжна розкіш')">Дізнатись ціну</button>
+                        <button class="add-cart-btn" onclick="addToCart('Білосніжна розкіш')">🛒 В кошик</button>
                         <button class="reserve-btn" onclick="reserveBouquet('Білосніжна розкіш')">Забронювати</button>
                     </div>
                 </div>
@@ -104,7 +108,7 @@
                     <h3>Рожева мрія</h3>
                     <p class="description">Пишний рожевий букет, що дарує радість.</p>
                     <div class="btn-group">
-                        <button class="order-btn" onclick="orderBouquet('Рожева мрія')">Дізнатись ціну</button>
+                        <button class="add-cart-btn" onclick="addToCart('Рожева мрія')">🛒 В кошик</button>
                         <button class="reserve-btn" onclick="reserveBouquet('Рожева мрія')">Забронювати</button>
                     </div>
                 </div>
@@ -116,7 +120,7 @@
                     <h3>Яскравий мікс</h3>
                     <p class="description">Контрастне поєднання червоних, білих та зелених відтінків.</p>
                     <div class="btn-group">
-                        <button class="order-btn" onclick="orderBouquet('Яскравий мікс')">Дізнатись ціну</button>
+                        <button class="add-cart-btn" onclick="addToCart('Яскравий мікс')">🛒 В кошик</button>
                         <button class="reserve-btn" onclick="reserveBouquet('Яскравий мікс')">Забронювати</button>
                     </div>
                 </div>
@@ -128,7 +132,7 @@
                     <h3>Елегантна класика</h3>
                     <p class="description">Вишукана композиція, яка підкреслює найщиріші почуття.</p>
                     <div class="btn-group">
-                        <button class="order-btn" onclick="orderBouquet('Елегантна класика')">Дізнатись ціну</button>
+                        <button class="add-cart-btn" onclick="addToCart('Елегантна класика')">🛒 В кошик</button>
                         <button class="reserve-btn" onclick="reserveBouquet('Елегантна класика')">Забронювати</button>
                     </div>
                 </div>
@@ -140,7 +144,7 @@
                     <h3>Весняний настрій</h3>
                     <p class="description">Свіжий подих весни у неймовірно гармонійному поєднанні квітів.</p>
                     <div class="btn-group">
-                        <button class="order-btn" onclick="orderBouquet('Весняний настрій')">Дізнатись ціну</button>
+                        <button class="add-cart-btn" onclick="addToCart('Весняний настрій')">🛒 В кошик</button>
                         <button class="reserve-btn" onclick="reserveBouquet('Весняний настрій')">Забронювати</button>
                     </div>
                 </div>
@@ -152,7 +156,7 @@
                     <h3>Чарівність моменту</h3>
                     <p class="description">Яскравий та розкішний букет, створений для приємних здивувань.</p>
                     <div class="btn-group">
-                        <button class="order-btn" onclick="orderBouquet('Чарівність моменту')">Дізнатись ціну</button>
+                        <button class="add-cart-btn" onclick="addToCart('Чарівність моменту')">🛒 В кошик</button>
                         <button class="reserve-btn" onclick="reserveBouquet('Чарівність моменту')">Забронювати</button>
                     </div>
                 </div>
@@ -164,7 +168,7 @@
                     <h3>Королівський шарм</h3>
                     <p class="description">Преміальний букет з особливими акцентами та любов'ю до деталей.</p>
                     <div class="btn-group">
-                        <button class="order-btn" onclick="orderBouquet('Королівський шарм')">Дізнатись ціну</button>
+                        <button class="add-cart-btn" onclick="addToCart('Королівський шарм')">🛒 В кошик</button>
                         <button class="reserve-btn" onclick="reserveBouquet('Королівський шарм')">Забронювати</button>
                     </div>
                 </div>
@@ -249,6 +253,43 @@
     <footer>
         <p>&copy; 2026 Imperial. Усі права захищені.</p>
     </footer>
+
+    <!-- Кошик -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>🛒 Ваш кошик</h3>
+            <button class="cart-close" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty" id="cartEmpty">
+                <span>🌸</span>
+                <p>Кошик порожній</p>
+                <small>Додайте букети, які вам сподобались</small>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display:none">
+            <div class="cart-total">
+                <span>Всього позицій:</span>
+                <strong id="cartTotalCount">0</strong>
+            </div>
+            <div class="cart-messenger-label">Оберіть месенджер для замовлення:</div>
+            <div class="cart-messenger-grid">
+                <button class="cart-m-btn active" data-m="telegram" onclick="selectCartMessenger('telegram')">✈️ Telegram</button>
+                <button class="cart-m-btn" data-m="whatsapp" onclick="selectCartMessenger('whatsapp')">💬 WhatsApp</button>
+                <button class="cart-m-btn" data-m="viber" onclick="selectCartMessenger('viber')">📱 Viber</button>
+                <button class="cart-m-btn" data-m="instagram" onclick="selectCartMessenger('instagram')">📸 Instagram</button>
+            </div>
+            <div id="cartCopyHint" class="copy-hint" style="display:none">
+                <span class="copy-hint-icon">📋</span>
+                <div class="copy-hint-text">
+                    <strong>Список замовлення буде скопійовано!</strong>
+                    <span id="cartCopyHintText"></span>
+                </div>
+            </div>
+            <button class="btn primary-btn cart-order-btn" onclick="orderFromCart()">Оформити замовлення</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

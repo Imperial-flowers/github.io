@@ -152,3 +152,137 @@ window.onclick = function(event) {
     const modal = document.getElementById('bookingModal');
     if (event.target == modal) closeModal();
 }
+
+/* ════════════════════════════════
+   CART LOGIC
+   ════════════════════════════════ */
+
+let cart = []; // [{name, qty}]
+let cartMessenger = 'telegram';
+
+function addToCart(name) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ name, qty: 1 });
+    }
+    updateCartUI();
+    bumpCartCount();
+
+    // Visual feedback on button
+    const btns = document.querySelectorAll('.add-cart-btn');
+    btns.forEach(btn => {
+        if (btn.getAttribute('onclick') === `addToCart('${name}')`) {
+            btn.classList.add('added');
+            btn.textContent = '✓ Додано';
+            setTimeout(() => {
+                btn.classList.remove('added');
+                btn.textContent = '🛒 В кошик';
+            }, 1500);
+        }
+    });
+}
+
+function removeFromCart(name) {
+    cart = cart.filter(i => i.name !== name);
+    updateCartUI();
+}
+
+function changeQty(name, delta) {
+    const item = cart.find(i => i.name === name);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) removeFromCart(name);
+    else updateCartUI();
+}
+
+function updateCartUI() {
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+
+    // Update counter badge
+    const countEl = document.getElementById('cartCount');
+    countEl.textContent = total;
+    countEl.style.background = total > 0 ? '' : 'var(--text-muted)';
+
+    // Update total in footer
+    const totalEl = document.getElementById('cartTotalCount');
+    if (totalEl) totalEl.textContent = total;
+
+    // Show/hide footer
+    const footer = document.getElementById('cartFooter');
+    if (footer) footer.style.display = total > 0 ? 'block' : 'none';
+
+    // Render items
+    const container = document.getElementById('cartItems');
+    const emptyEl = document.getElementById('cartEmpty');
+    if (!container) return;
+
+    if (cart.length === 0) {
+        container.innerHTML = '';
+        container.appendChild(emptyEl || createEmptyEl());
+        return;
+    }
+
+    container.innerHTML = cart.map(item => `
+        <div class="cart-item">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-qty">
+                <button class="qty-btn" onclick="changeQty('${item.name}', -1)">−</button>
+                <span class="qty-num">${item.qty}</span>
+                <button class="qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart('${item.name}')" title="Видалити">×</button>
+        </div>
+    `).join('');
+}
+
+function createEmptyEl() {
+    const d = document.createElement('div');
+    d.className = 'cart-empty';
+    d.id = 'cartEmpty';
+    d.innerHTML = '<span>🌸</span><p>Кошик порожній</p><small>Додайте букети, які вам сподобались</small>';
+    return d;
+}
+
+function bumpCartCount() {
+    const el = document.getElementById('cartCount');
+    el.classList.add('bump');
+    setTimeout(() => el.classList.remove('bump'), 300);
+}
+
+function toggleCart() {
+    const sidebar = document.getElementById('cartSidebar');
+    const overlay = document.getElementById('cartOverlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+}
+
+function selectCartMessenger(m) {
+    cartMessenger = m;
+    document.querySelectorAll('.cart-m-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.cart-m-btn[data-m="${m}"]`).classList.add('active');
+
+    const hint = document.getElementById('cartCopyHint');
+    const hintText = document.getElementById('cartCopyHintText');
+    if (m === 'viber') {
+        hintText.innerHTML = 'Після відкриття Viber — натисніть і утримайте поле вводу та оберіть <b>«Вставити»</b> ✨';
+        hint.style.display = 'flex';
+    } else if (m === 'instagram') {
+        hintText.innerHTML = 'Після відкриття Instagram Direct — натисніть і утримайте поле вводу та оберіть <b>«Вставити»</b> ✨';
+        hint.style.display = 'flex';
+    } else {
+        hint.style.display = 'none';
+    }
+}
+
+function orderFromCart() {
+    if (cart.length === 0) return;
+
+    const itemsList = cart.map(i => `• ${i.name}${i.qty > 1 ? ` — ${i.qty} шт.` : ''}`).join('\n');
+    const message = `Вітаю! 🌸 Хочу оформити замовлення:\n\n${itemsList}\n\nПідкажіть, будь ласка, як можна це оформити та дізнатись актуальну ціну?`;
+
+    sendToMessenger(cartMessenger, message);
+    toggleCart();
+}
