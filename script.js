@@ -89,7 +89,7 @@ function sendToMessenger(platform, message) {
 function orderBouquet(bouquetName) {
     currentBouquetItem = bouquetName;
     document.getElementById('modalBouquetName').innerText = `Букет: "${bouquetName}"`;
-    document.getElementById('bookingModal').style.removeProperty('display');
+    document.getElementById('bookingModal').classList.add('open');
     document.body.style.overflow = 'hidden';
     document.getElementById('bookingDate').value = '';
     const today = new Date().toISOString().split('T')[0];
@@ -111,7 +111,7 @@ function openContact(platform, phone) {
 function reserveBouquet(bouquetName) {
     currentBouquetItem = bouquetName;
     document.getElementById('modalBouquetName').innerText = `Букет: "${bouquetName}"`;
-    document.getElementById('bookingModal').style.removeProperty('display');
+    document.getElementById('bookingModal').classList.add('open');
     document.body.style.overflow = 'hidden';
     document.getElementById('dateGroup').style.display = 'block';
     document.getElementById('bookingDate').value = '';
@@ -124,7 +124,7 @@ function reserveBouquet(bouquetName) {
 }
 
 function closeModal() {
-    document.getElementById('bookingModal').style.display = 'none';
+    document.getElementById('bookingModal').classList.remove('open');
     document.body.style.overflow = '';
     document.getElementById('bookingDate').value = '';
 }
