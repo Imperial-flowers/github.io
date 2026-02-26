@@ -457,76 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderColors('Троянди');
 });
 
-/* ════════════════════════════════
-   CATEGORIES FILTER
-   ════════════════════════════════ */
-
-let activeCategory = 'all';
-
-function toggleCategories() {
-    const sidebar = document.getElementById('catSidebar');
-    const overlay = document.getElementById('catOverlay');
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
-}
-
-function filterCategory(btn, cat) {
-    activeCategory = cat;
-
-    // Update active buttons in both dropdown and sidebar
-    document.querySelectorAll('.cat-item, .dropdown-item').forEach(b => b.classList.remove('active'));
-    // Activate all matching buttons across both menus
-    document.querySelectorAll(`[data-cat="${cat}"]`).forEach(b => b.classList.add('active'));
-
-    // Filter cards
-    const cards = document.querySelectorAll('.flower-card');
-    cards.forEach(card => {
-        const cardCat = card.dataset.category;
-        if (cat === 'all' || cardCat === cat) {
-            card.classList.remove('hidden');
-        } else {
-            card.classList.add('hidden');
-        }
-    });
-
-    // Show/hide filter badge
-    const subtitle = document.querySelector('.section-subtitle');
-    const existingBadge = document.getElementById('filterBadge');
-    if (existingBadge) existingBadge.remove();
-
-    if (cat !== 'all') {
-        const icons = { 'Троянди':'🌹', 'Хризантеми':'🌼', 'Тюльпани':'🌷', 'Мікс':'🌺' };
-        const badge = document.createElement('div');
-        badge.id = 'filterBadge';
-        badge.className = 'filter-badge';
-        badge.innerHTML = `${icons[cat] || '💐'} ${cat} <span onclick="filterCategory(document.querySelector('.cat-item[data-cat=\'all\']'), 'all')" style="opacity:0.6; font-size:14px; margin-left:2px;">×</span>`;
-        badge.onclick = () => {
-            filterCategory(document.querySelector(".cat-item[data-cat='all']"), 'all');
-        };
-        subtitle.insertAdjacentElement('afterend', badge);
-    }
-
-    // Close sidebar if open
-    const catSidebar = document.getElementById('catSidebar');
-    if (catSidebar && catSidebar.classList.contains('open')) toggleCategories();
-
-    // Scroll to catalog
-    document.getElementById('catalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function openBuildTab() {
-    const sidebar = document.getElementById('cartSidebar');
-    const overlay = document.getElementById('cartOverlay');
-    // Open cart if not already open
-    if (!sidebar.classList.contains('open')) {
-        sidebar.classList.add('open');
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-    // Always switch to build tab
-    switchTab('build');
-}
 
 /* ════════════════════════════════
    NEW CATEGORY SYSTEM
@@ -556,49 +486,35 @@ document.addEventListener('DOMContentLoaded', () => {
     renderColors('Троянди');
 });
 
-/* ════════════════════════════════
-   NEW CATALOG FILTER
-   ════════════════════════════════ */
 
-const CAT_INFO = {
-    'all':        { label: 'Всі категорії',        desc: 'Весь асортимент Imperial — від класичних букетів до унікальних подарунків' },
-    'troyandy':   { label: 'Троянди',              desc: 'Розкішні троянди — символ любові та вишуканості' },
-    'khrizantema':{ label: 'Хризантема',           desc: 'Ніжні хризантеми — для особливих моментів' },
-    'tulpany':    { label: 'Тюльпани',             desc: 'Яскраві тюльпани — весняний настрій у букеті' },
-    'kulky':      { label: 'Кульки',               desc: 'Святкові кульки для будь-якого свята' },
-    'solodki':    { label: 'Солодкі букети',       desc: 'Смачні букети з цукерок та солодощів — оригінальний подарунок' },
-    'igrashky':   { label: "М'які іграшки",        desc: "М'які іграшки — ніжний подарунок для коханих" },
-    'topery':     { label: 'Топери',               desc: 'Красиві топери для тортів та святкових композицій' },
-    'korobky':    { label: 'Коробки та кошики',    desc: 'Елегантні коробки, сумочки та кошики з квітами' },
-    'listivky':   { label: 'Листівки',             desc: 'Красиві листівки для будь-якого приводу' },
-    'sumochky':   { label: 'Сумочки квітів',       desc: 'Стильні сумочки з квітами — модний подарунок' },
-};
+/* ═══════════════════════════════════════════
+   CATALOG FILTER
+   ═══════════════════════════════════════════ */
+
+const CATS={"troyandy":{"label":"Троянди","desc":"Розкішні троянди — символ любові та вишуканості"},"khrizantema":{"label":"Хризантема","desc":"Ніжні хризантеми — для особливих моментів"},"tulpany":{"label":"Тюльпани","desc":"Яскраві тюльпани — весняний настрій у букеті"},"kulky":{"label":"Кульки","desc":"Святкові кульки для будь-якого свята"},"solodki":{"label":"Солодкі букети","desc":"Букети з цукерок та солодощів — оригінальний подарунок"},"igrashky":{"label":"М'які іграшки","desc":"М'які іграшки — ніжний подарунок для коханих"},"topery":{"label":"Топери","desc":"Красиві топери для тортів та святкових композицій"},"korobky":{"label":"Коробки та кошики","desc":"Елегантні коробки, сумочки та кошики з квітами"},"listivky":{"label":"Листівки","desc":"Красиві листівки для будь-якого приводу"},"sumochky":{"label":"Сумочки квітів","desc":"Стильні сумочки з квітами — модний подарунок"}};
 
 function showCat(btn, catId) {
-    // Update sidebar active state
-    document.querySelectorAll('.csi-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.csi').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    // Update header
-    const info = CAT_INFO[catId] || {};
-    document.getElementById('productsTitle').textContent = info.label || catId;
-    document.getElementById('productsDesc').textContent = info.desc || '';
+    const info = catId === 'all'
+        ? {label: 'Всі категорії', desc: 'Весь асортимент Imperial — від класичних букетів до унікальних подарунків'}
+        : (CATS[catId] || {label: catId, desc: ''});
 
-    // Filter cards
-    const cards = document.querySelectorAll('.pcard');
+    document.getElementById('catTitle').textContent = info.label;
+    document.getElementById('catDesc').textContent = info.desc;
+
     let visible = 0;
-    cards.forEach(card => {
+    document.querySelectorAll('.pc').forEach(card => {
         const show = catId === 'all' || card.dataset.cat === catId;
         card.classList.toggle('hidden', !show);
         if (show) visible++;
     });
 
-    // Show/hide empty state
-    document.getElementById('productsEmpty').style.display = visible === 0 ? 'flex' : 'none';
-    document.getElementById('productsGrid').style.display = visible === 0 ? 'none' : 'grid';
+    document.getElementById('catEmpty').style.display = visible === 0 ? 'block' : 'none';
+    document.getElementById('pcGrid').style.display = visible === 0 ? 'none' : 'grid';
 
-    // Scroll to catalog on mobile
     if (window.innerWidth < 900) {
-        document.getElementById('catalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('catalog').scrollIntoView({behavior: 'smooth', block: 'start'});
     }
 }

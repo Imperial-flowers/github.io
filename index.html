@@ -62,799 +62,645 @@
     </section>
 
     <!-- Каталог -->
-    <section id="catalog" class="catalog-new">
-    <div class="catalog-layout">
+    <section id="catalog" class="cat-section">
+        <div class="cat-wrap">
 
-        <!-- Бокова панель категорій -->
-        <aside class="cat-panel">
-            <div class="cat-panel-title">Категорії</div>
-            
-                <button class="csi-btn active" data-catid="all" onclick="showCat(this, 'all')">
-                    <span class="csi-icon">💐</span>
-                    <span class="csi-label">Всі категорії</span>
-                </button>
-                <button class="csi-btn " data-catid="troyandy" onclick="showCat(this, 'troyandy')">
-                    <span class="csi-icon">🌹</span>
-                    <span class="csi-label">Троянди</span>
-                </button>
-                <button class="csi-btn " data-catid="khrizantema" onclick="showCat(this, 'khrizantema')">
-                    <span class="csi-icon">🌼</span>
-                    <span class="csi-label">Хризантема</span>
-                </button>
-                <button class="csi-btn " data-catid="tulpany" onclick="showCat(this, 'tulpany')">
-                    <span class="csi-icon">🌷</span>
-                    <span class="csi-label">Тюльпани</span>
-                </button>
-                <button class="csi-btn " data-catid="kulky" onclick="showCat(this, 'kulky')">
-                    <span class="csi-icon">🎈</span>
-                    <span class="csi-label">Кульки</span>
-                </button>
-                <button class="csi-btn " data-catid="solodki" onclick="showCat(this, 'solodki')">
-                    <span class="csi-icon">🍬</span>
-                    <span class="csi-label">Солодкі букети</span>
-                </button>
-                <button class="csi-btn " data-catid="igrashky" onclick="showCat(this, 'igrashky')">
-                    <span class="csi-icon">🧸</span>
-                    <span class="csi-label">М'які іграшки</span>
-                </button>
-                <button class="csi-btn " data-catid="topery" onclick="showCat(this, 'topery')">
-                    <span class="csi-icon">✨</span>
-                    <span class="csi-label">Топери</span>
-                </button>
-                <button class="csi-btn " data-catid="korobky" onclick="showCat(this, 'korobky')">
-                    <span class="csi-icon">🎁</span>
-                    <span class="csi-label">Коробки та кошики</span>
-                </button>
-                <button class="csi-btn " data-catid="listivky" onclick="showCat(this, 'listivky')">
-                    <span class="csi-icon">💌</span>
-                    <span class="csi-label">Листівки</span>
-                </button>
-                <button class="csi-btn " data-catid="sumochky" onclick="showCat(this, 'sumochky')">
-                    <span class="csi-icon">👜</span>
-                    <span class="csi-label">Сумочки квітів</span>
-                </button>
-            <div class="cat-panel-divider"></div>
-            <button class="cat-panel-build" onclick="openBuildTab()">🌸 Скласти букет</button>
-        </aside>
-
-        <!-- Головна область товарів -->
-        <div class="products-area">
-            <div class="products-header" id="productsHeader">
-                <h2 class="products-title" id="productsTitle">Всі категорії</h2>
-                <p class="products-desc" id="productsDesc">Весь асортимент Imperial — від класичних букетів до унікальних подарунків</p>
-            </div>
-            <div class="products-grid" id="productsGrid">
+            <!-- Ліва панель -->
+            <aside class="cat-side">
+                <div class="cat-side-head">Категорії</div>
+                <button class="csi active" data-catid="all" onclick="showCat(this,'all')">Всі категорії</button>
+                <button class="csi" data-catid="troyandy" onclick="showCat(this,'troyandy')">Троянди</button>
+                <button class="csi" data-catid="khrizantema" onclick="showCat(this,'khrizantema')">Хризантема</button>
+                <button class="csi" data-catid="tulpany" onclick="showCat(this,'tulpany')">Тюльпани</button>
+                <button class="csi" data-catid="kulky" onclick="showCat(this,'kulky')">Кульки</button>
+                <button class="csi" data-catid="solodki" onclick="showCat(this,'solodki')">Солодкі букети</button>
+                <button class="csi" data-catid="igrashky" onclick="showCat(this,'igrashky')">М'які іграшки</button>
+                <button class="csi" data-catid="topery" onclick="showCat(this,'topery')">Топери</button>
+                <button class="csi" data-catid="korobky" onclick="showCat(this,'korobky')">Коробки та кошики</button>
+                <button class="csi" data-catid="listivky" onclick="showCat(this,'listivky')">Листівки</button>
+                <button class="csi" data-catid="sumochky" onclick="showCat(this,'sumochky')">Сумочки квітів</button>
                 
-            <div class="pcard" data-cat="kulky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Кульки/4.1.jpg" alt="Кульки #1" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Кульки #1</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Кульки #1')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Кульки #1')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="kulky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Кульки/4.2.jpg" alt="Кульки #2" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Кульки #2</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Кульки #2')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Кульки #2')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="kulky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Кульки/4.3.jpg" alt="Кульки #3" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Кульки #3</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Кульки #3')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Кульки #3')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="kulky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Кульки/4.4.jpg" alt="Кульки #4" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Кульки #4</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Кульки #4')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Кульки #4')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="kulky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Кульки/4.5.jpg" alt="Кульки #5" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Кульки #5</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Кульки #5')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Кульки #5')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="solodki">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Солодкі букети/5.1.jpg" alt="Солодкі букети #1" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Солодкі букети #1</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Солодкі букети #1')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Солодкі букети #1')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="solodki">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Солодкі букети/5.2.jpg" alt="Солодкі букети #2" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Солодкі букети #2</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Солодкі букети #2')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Солодкі букети #2')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="solodki">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Солодкі букети/5.3.jpg" alt="Солодкі букети #3" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Солодкі букети #3</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Солодкі букети #3')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Солодкі букети #3')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="solodki">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Солодкі букети/5.4.jpg" alt="Солодкі букети #4" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Солодкі букети #4</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Солодкі букети #4')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Солодкі букети #4')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="solodki">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Солодкі букети/5.5.jpg" alt="Солодкі букети #5" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Солодкі букети #5</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Солодкі букети #5')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Солодкі букети #5')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="solodki">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Солодкі букети/5.6.jpg" alt="Солодкі букети #6" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Солодкі букети #6</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Солодкі букети #6')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Солодкі букети #6')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="igrashky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/М'яки іграшки/6.1.jpg" alt="М'які іграшки #1" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">М'які іграшки #1</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('М'які іграшки #1')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('М'які іграшки #1')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="igrashky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/М'яки іграшки/6.2.jpg" alt="М'які іграшки #2" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">М'які іграшки #2</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('М'які іграшки #2')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('М'які іграшки #2')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="igrashky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/М'яки іграшки/6.3.jpg" alt="М'які іграшки #3" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">М'які іграшки #3</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('М'які іграшки #3')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('М'які іграшки #3')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="igrashky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/М'яки іграшки/6.4.jpg" alt="М'які іграшки #4" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">М'які іграшки #4</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('М'які іграшки #4')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('М'які іграшки #4')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="igrashky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/М'яки іграшки/6.5.jpg" alt="М'які іграшки #5" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">М'які іграшки #5</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('М'які іграшки #5')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('М'які іграшки #5')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="igrashky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/М'яки іграшки/6.6.jpg" alt="М'які іграшки #6" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">М'які іграшки #6</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('М'які іграшки #6')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('М'які іграшки #6')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="igrashky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/М'яки іграшки/6.7.jpg" alt="М'які іграшки #7" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">М'які іграшки #7</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('М'які іграшки #7')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('М'які іграшки #7')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="igrashky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/М'яки іграшки/6.8.jpg" alt="М'які іграшки #8" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">М'які іграшки #8</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('М'які іграшки #8')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('М'які іграшки #8')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.1.jpg" alt="Коробки та кошики #1" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #1</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #1')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #1')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.2.jpg" alt="Коробки та кошики #2" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #2</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #2')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #2')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.3.jpg" alt="Коробки та кошики #3" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #3</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #3')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #3')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.4.jpg" alt="Коробки та кошики #4" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #4</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #4')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #4')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.5.jpg" alt="Коробки та кошики #5" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #5</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #5')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #5')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.6.jpg" alt="Коробки та кошики #6" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #6</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #6')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #6')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.7.jpg" alt="Коробки та кошики #7" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #7</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #7')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #7')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.8.jpg" alt="Коробки та кошики #8" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #8</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #8')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #8')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.9.jpg" alt="Коробки та кошики #9" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #9</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #9')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #9')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="korobky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Коробки сумочки та корзини/8.10.jpg" alt="Коробки та кошики #10" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Коробки та кошики #10</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Коробки та кошики #10')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Коробки та кошики #10')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.1.jpg" alt="Листівки #1" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #1</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #1')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #1')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.2.jpg" alt="Листівки #2" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #2</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #2')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #2')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.3.jpg" alt="Листівки #3" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #3</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #3')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #3')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.4.jpg" alt="Листівки #4" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #4</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #4')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #4')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.5.jpg" alt="Листівки #5" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #5</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #5')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #5')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.6.jpg" alt="Листівки #6" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #6</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #6')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #6')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.7.jpg" alt="Листівки #7" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #7</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #7')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #7')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.8.jpg" alt="Листівки #8" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #8</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #8')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #8')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.9.jpg" alt="Листівки #9" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #9</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #9')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #9')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.10.jpg" alt="Листівки #10" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #10</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #10')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #10')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.11.jpg" alt="Листівки #11" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #11</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #11')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #11')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.12.jpg" alt="Листівки #12" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #12</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #12')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #12')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.13.jpg" alt="Листівки #13" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #13</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #13')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #13')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.14.jpg" alt="Листівки #14" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #14</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #14')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #14')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.15.jpg" alt="Листівки #15" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #15</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #15')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #15')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.16.jpg" alt="Листівки #16" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #16</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #16')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #16')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.17.jpg" alt="Листівки #17" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #17</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #17')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #17')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.18.jpg" alt="Листівки #18" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #18</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #18')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #18')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.19.jpg" alt="Листівки #19" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #19</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #19')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #19')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.20.jpg" alt="Листівки #20" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #20</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #20')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #20')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.21.jpg" alt="Листівки #21" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #21</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #21')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #21')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.22.jpg" alt="Листівки #22" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #22</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #22')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #22')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.23.jpg" alt="Листівки #23" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #23</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #23')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #23')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.24.jpg" alt="Листівки #24" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #24</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #24')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #24')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.25.jpg" alt="Листівки #25" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #25</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #25')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #25')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.26.jpg" alt="Листівки #26" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #26</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #26')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #26')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="listivky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Листівки/9.27.jpg" alt="Листівки #27" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Листівки #27</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Листівки #27')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Листівки #27')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="sumochky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Сумочки квітів/10.1.jpg" alt="Сумочки квітів #1" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Сумочки квітів #1</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Сумочки квітів #1')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Сумочки квітів #1')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="sumochky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Сумочки квітів/10.2.jpg" alt="Сумочки квітів #2" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Сумочки квітів #2</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Сумочки квітів #2')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Сумочки квітів #2')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="sumochky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Сумочки квітів/10.3.jpg" alt="Сумочки квітів #3" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Сумочки квітів #3</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Сумочки квітів #3')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Сумочки квітів #3')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            <div class="pcard" data-cat="sumochky">
-                <div class="pcard-img-wrap">
-                    <img src="images/images1/Сумочки квітів/10.4.jpg" alt="Сумочки квітів #4" loading="lazy" onerror="this.style.background='#f0e8e0';this.src=''">
-                </div>
-                <div class="pcard-body">
-                    <div class="pcard-name">Сумочки квітів #4</div>
-                    <div class="pcard-btns">
-                        <button class="pcard-cart" onclick="addToCart('Сумочки квітів #4')">🛒 В кошик</button>
-                        <button class="pcard-order" onclick="reserveBouquet('Сумочки квітів #4')">Замовити</button>
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div class="products-empty" id="productsEmpty" style="display:none">
-                <span>🌸</span>
-                <p>У цій категорії поки немає товарів</p>
-                <small>Зверніться до нас — ми підберемо щось особливе!</small>
-            </div>
-        </div>
+                <div class="cat-side-sep"></div>
+                <button class="csi csi-build" onclick="openBuildTab()">🌸 Скласти букет</button>
+            </aside>
 
-    </div>
-</section>
+            <!-- Права область -->
+            <div class="cat-main">
+                <div class="cat-main-head">
+                    <h2 id="catTitle">Всі категорії</h2>
+                    <p id="catDesc">Весь асортимент Imperial — від класичних букетів до унікальних подарунків</p>
+                </div>
+                <div class="pc-grid" id="pcGrid">
+                    
+                <div class="pc" data-cat="kulky">
+                    <div class="pc-img"><img src="images/images1/Кульки/4.1.jpg" alt="Кульки #1" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Кульки #1</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Кульки #1')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Кульки #1')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="kulky">
+                    <div class="pc-img"><img src="images/images1/Кульки/4.2.jpg" alt="Кульки #2" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Кульки #2</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Кульки #2')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Кульки #2')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="kulky">
+                    <div class="pc-img"><img src="images/images1/Кульки/4.3.jpg" alt="Кульки #3" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Кульки #3</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Кульки #3')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Кульки #3')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="kulky">
+                    <div class="pc-img"><img src="images/images1/Кульки/4.4.jpg" alt="Кульки #4" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Кульки #4</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Кульки #4')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Кульки #4')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="kulky">
+                    <div class="pc-img"><img src="images/images1/Кульки/4.5.jpg" alt="Кульки #5" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Кульки #5</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Кульки #5')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Кульки #5')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="solodki">
+                    <div class="pc-img"><img src="images/images1/Солодкі букети/5.1.jpg" alt="Солодкі букети #1" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Солодкі букети #1</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Солодкі букети #1')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Солодкі букети #1')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="solodki">
+                    <div class="pc-img"><img src="images/images1/Солодкі букети/5.2.jpg" alt="Солодкі букети #2" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Солодкі букети #2</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Солодкі букети #2')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Солодкі букети #2')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="solodki">
+                    <div class="pc-img"><img src="images/images1/Солодкі букети/5.3.jpg" alt="Солодкі букети #3" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Солодкі букети #3</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Солодкі букети #3')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Солодкі букети #3')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="solodki">
+                    <div class="pc-img"><img src="images/images1/Солодкі букети/5.4.jpg" alt="Солодкі букети #4" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Солодкі букети #4</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Солодкі букети #4')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Солодкі букети #4')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="solodki">
+                    <div class="pc-img"><img src="images/images1/Солодкі букети/5.5.jpg" alt="Солодкі букети #5" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Солодкі букети #5</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Солодкі букети #5')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Солодкі букети #5')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="solodki">
+                    <div class="pc-img"><img src="images/images1/Солодкі букети/5.6.jpg" alt="Солодкі букети #6" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Солодкі букети #6</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Солодкі букети #6')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Солодкі букети #6')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="igrashky">
+                    <div class="pc-img"><img src="images/images1/М'яки іграшки/6.1.jpg" alt="М'які іграшки #1" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">М'які іграшки #1</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('М'які іграшки #1')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('М'які іграшки #1')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="igrashky">
+                    <div class="pc-img"><img src="images/images1/М'яки іграшки/6.2.jpg" alt="М'які іграшки #2" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">М'які іграшки #2</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('М'які іграшки #2')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('М'які іграшки #2')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="igrashky">
+                    <div class="pc-img"><img src="images/images1/М'яки іграшки/6.3.jpg" alt="М'які іграшки #3" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">М'які іграшки #3</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('М'які іграшки #3')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('М'які іграшки #3')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="igrashky">
+                    <div class="pc-img"><img src="images/images1/М'яки іграшки/6.4.jpg" alt="М'які іграшки #4" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">М'які іграшки #4</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('М'які іграшки #4')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('М'які іграшки #4')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="igrashky">
+                    <div class="pc-img"><img src="images/images1/М'яки іграшки/6.5.jpg" alt="М'які іграшки #5" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">М'які іграшки #5</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('М'які іграшки #5')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('М'які іграшки #5')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="igrashky">
+                    <div class="pc-img"><img src="images/images1/М'яки іграшки/6.6.jpg" alt="М'які іграшки #6" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">М'які іграшки #6</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('М'які іграшки #6')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('М'які іграшки #6')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="igrashky">
+                    <div class="pc-img"><img src="images/images1/М'яки іграшки/6.7.jpg" alt="М'які іграшки #7" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">М'які іграшки #7</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('М'які іграшки #7')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('М'які іграшки #7')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="igrashky">
+                    <div class="pc-img"><img src="images/images1/М'яки іграшки/6.8.jpg" alt="М'які іграшки #8" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">М'які іграшки #8</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('М'які іграшки #8')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('М'які іграшки #8')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.1.jpg" alt="Коробки та кошики #1" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #1</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #1')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #1')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.2.jpg" alt="Коробки та кошики #2" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #2</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #2')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #2')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.3.jpg" alt="Коробки та кошики #3" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #3</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #3')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #3')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.4.jpg" alt="Коробки та кошики #4" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #4</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #4')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #4')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.5.jpg" alt="Коробки та кошики #5" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #5</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #5')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #5')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.6.jpg" alt="Коробки та кошики #6" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #6</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #6')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #6')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.7.jpg" alt="Коробки та кошики #7" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #7</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #7')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #7')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.8.jpg" alt="Коробки та кошики #8" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #8</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #8')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #8')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.9.jpg" alt="Коробки та кошики #9" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #9</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #9')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #9')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="korobky">
+                    <div class="pc-img"><img src="images/images1/Коробки сумочки та корзини/8.10.jpg" alt="Коробки та кошики #10" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Коробки та кошики #10</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Коробки та кошики #10')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Коробки та кошики #10')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.1.jpg" alt="Листівки #1" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #1</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #1')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #1')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.2.jpg" alt="Листівки #2" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #2</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #2')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #2')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.3.jpg" alt="Листівки #3" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #3</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #3')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #3')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.4.jpg" alt="Листівки #4" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #4</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #4')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #4')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.5.jpg" alt="Листівки #5" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #5</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #5')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #5')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.6.jpg" alt="Листівки #6" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #6</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #6')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #6')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.7.jpg" alt="Листівки #7" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #7</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #7')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #7')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.8.jpg" alt="Листівки #8" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #8</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #8')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #8')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.9.jpg" alt="Листівки #9" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #9</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #9')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #9')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.10.jpg" alt="Листівки #10" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #10</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #10')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #10')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.11.jpg" alt="Листівки #11" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #11</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #11')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #11')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.12.jpg" alt="Листівки #12" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #12</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #12')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #12')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.13.jpg" alt="Листівки #13" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #13</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #13')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #13')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.14.jpg" alt="Листівки #14" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #14</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #14')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #14')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.15.jpg" alt="Листівки #15" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #15</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #15')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #15')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.16.jpg" alt="Листівки #16" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #16</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #16')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #16')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.17.jpg" alt="Листівки #17" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #17</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #17')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #17')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.18.jpg" alt="Листівки #18" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #18</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #18')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #18')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.19.jpg" alt="Листівки #19" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #19</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #19')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #19')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.20.jpg" alt="Листівки #20" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #20</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #20')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #20')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.21.jpg" alt="Листівки #21" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #21</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #21')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #21')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.22.jpg" alt="Листівки #22" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #22</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #22')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #22')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.23.jpg" alt="Листівки #23" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #23</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #23')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #23')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.24.jpg" alt="Листівки #24" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #24</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #24')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #24')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.25.jpg" alt="Листівки #25" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #25</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #25')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #25')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.26.jpg" alt="Листівки #26" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #26</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #26')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #26')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="listivky">
+                    <div class="pc-img"><img src="images/images1/Листівки/9.27.jpg" alt="Листівки #27" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Листівки #27</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Листівки #27')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Листівки #27')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="sumochky">
+                    <div class="pc-img"><img src="images/images1/Сумочки квітів/10.1.jpg" alt="Сумочки квітів #1" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Сумочки квітів #1</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Сумочки квітів #1')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Сумочки квітів #1')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="sumochky">
+                    <div class="pc-img"><img src="images/images1/Сумочки квітів/10.2.jpg" alt="Сумочки квітів #2" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Сумочки квітів #2</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Сумочки квітів #2')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Сумочки квітів #2')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="sumochky">
+                    <div class="pc-img"><img src="images/images1/Сумочки квітів/10.3.jpg" alt="Сумочки квітів #3" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Сумочки квітів #3</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Сумочки квітів #3')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Сумочки квітів #3')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pc" data-cat="sumochky">
+                    <div class="pc-img"><img src="images/images1/Сумочки квітів/10.4.jpg" alt="Сумочки квітів #4" loading="lazy"></div>
+                    <div class="pc-body">
+                        <div class="pc-name">Сумочки квітів #4</div>
+                        <div class="pc-btns">
+                            <button class="pc-btn-cart" onclick="addToCart('Сумочки квітів #4')">В кошик</button>
+                            <button class="pc-btn-order" onclick="reserveBouquet('Сумочки квітів #4')">Замовити</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="cat-empty" id="catEmpty" style="display:none">
+                    <p>У цій категорії поки немає товарів</p>
+                    <small>Зверніться до нас — підберемо щось особливе!</small>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <!-- Модальне вікно для бронювання -->
     <div id="bookingModal" class="modal">
