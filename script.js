@@ -156,429 +156,27 @@ window.onclick = function(event) {
     if (event.target == modal) closeModal();;
 }
 
-/* ════════════════════════════════
-   CART LOGIC
-   ════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   CATALOG — єдина версія функцій
+   ═══════════════════════════════════════════ */
 
-let cart = []; // [{name, qty}]
-let cartMessenger = 'telegram';
-
-function addToCart(name) {
-    const existing = cart.find(i => i.name === name);
-    if (existing) {
-        existing.qty++;
-    } else {
-        cart.push({ name, qty: 1 });
-    }
-    updateCartUI();
-    bumpCartCount();
-
-    // Visual feedback on button
-    const btns = document.querySelectorAll('.add-cart-btn');
-    btns.forEach(btn => {
-        if (btn.getAttribute('onclick') === `addToCart('${name}')`) {
-            btn.classList.add('added');
-            btn.textContent = '✓ Додано';
-            setTimeout(() => {
-                btn.classList.remove('added');
-                btn.textContent = '🛒 В кошик';
-            }, 1500);
-        }
-    });
-}
-
-function removeFromCart(name) {
-    cart = cart.filter(i => i.name !== name);
-    updateCartUI();
-}
-
-function changeQty(name, delta) {
-    const item = cart.find(i => i.name === name);
-    if (!item) return;
-    item.qty += delta;
-    if (item.qty <= 0) removeFromCart(name);
-    else updateCartUI();
-}
-
-function updateCartUI() {
-    const total = cart.reduce((s, i) => s + i.qty, 0);
-
-    // Update counter badge
-    const countEl = document.getElementById('cartCount');
-    countEl.textContent = total;
-    countEl.style.background = total > 0 ? '' : 'var(--text-muted)';
-
-    // Update total in footer
-    const totalEl = document.getElementById('cartTotalCount');
-    if (totalEl) totalEl.textContent = total;
-
-    // Show/hide footer
-    const footer = document.getElementById('cartFooter');
-    if (footer) footer.style.display = total > 0 ? 'block' : 'none';
-
-    // Render items
-    const container = document.getElementById('cartItems');
-    const emptyEl = document.getElementById('cartEmpty');
-    if (!container) return;
-
-    if (cart.length === 0) {
-        container.innerHTML = '<div class="cart-empty"><span>🌸</span><p>Кошик порожній</p><small>Додайте букети, які вам сподобались</small></div>';
-        return;
-    }
-
-    container.innerHTML = cart.map(item => `
-        <div class="cart-item">
-            <div class="cart-item-name">${item.name}</div>
-            <div class="cart-item-qty">
-                <button class="qty-btn" onclick="changeQty('${item.name}', -1)">−</button>
-                <span class="qty-num">${item.qty}</span>
-                <button class="qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
-            </div>
-            <button class="cart-item-remove" onclick="removeFromCart('${item.name}')" title="Видалити">×</button>
-        </div>
-    `).join('');
-}
-
-function createEmptyEl() {
-    const d = document.createElement('div');
-    d.className = 'cart-empty';
-    d.id = 'cartEmpty';
-    d.innerHTML = '<span>🌸</span><p>Кошик порожній</p><small>Додайте букети, які вам сподобались</small>';
-    return d;
-}
-
-function bumpCartCount() {
-    const el = document.getElementById('cartCount');
-    el.classList.add('bump');
-    setTimeout(() => el.classList.remove('bump'), 300);
-}
-
-function toggleCart() {
-    const sidebar = document.getElementById('cartSidebar');
-    const overlay = document.getElementById('cartOverlay');
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
-}
-
-function selectCartMessenger(m) {
-    cartMessenger = m;
-    document.querySelectorAll('.cart-m-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.cart-m-btn[data-m="${m}"]`).classList.add('active');
-
-    const hint = document.getElementById('cartCopyHint');
-    const hintText = document.getElementById('cartCopyHintText');
-    if (m === 'viber') {
-        hintText.innerHTML = 'Після відкриття Viber — натисніть і утримайте поле вводу та оберіть <b>«Вставити»</b> ✨';
-        hint.style.display = 'flex';
-    } else if (m === 'instagram') {
-        hintText.innerHTML = 'Після відкриття Instagram Direct — натисніть і утримайте поле вводу та оберіть <b>«Вставити»</b> ✨';
-        hint.style.display = 'flex';
-    } else {
-        hint.style.display = 'none';
-    }
-}
-
-function orderFromCart() {
-    if (cart.length === 0) return;
-
-    const itemsList = cart.map(i => `• ${i.name}${i.qty > 1 ? ` — ${i.qty} шт.` : ''}`).join('\n');
-    const message = `Вітаю! 🌸 Хочу оформити замовлення:\n\n${itemsList}\n\nПідкажіть, будь ласка, як можна це оформити та дізнатись актуальну ціну?`;
-
-    sendToMessenger(cartMessenger, message);
-    toggleCart();
-}
-
-/* ════════════════════════════════
-   BOUQUET BUILDER
-   ════════════════════════════════ */
-
-const FLOWER_COLORS = {
-    'Троянди':     [
-        { name: 'Червоні',    hex: '#c0392b' },
-        { name: 'Рожеві',     hex: '#e91e8c' },
-        { name: 'Білі',       hex: '#f5f0eb' },
-        { name: 'Кремові',    hex: '#f0d9b5' },
-        { name: 'Жовті',      hex: '#f1c40f' },
-        { name: 'Бордові',    hex: '#7b1e3a' },
-        { name: 'Персикові',  hex: '#ffb347' },
-        { name: 'Мікс',       hex: 'linear-gradient(135deg,#e91e8c,#f1c40f,#c0392b)' },
-    ],
-    'Хризантеми':  [
-        { name: 'Білі',       hex: '#f5f0eb' },
-        { name: 'Жовті',      hex: '#f1c40f' },
-        { name: 'Рожеві',     hex: '#e91e8c' },
-        { name: 'Фіолетові',  hex: '#8e44ad' },
-        { name: 'Кремові',    hex: '#f0d9b5' },
-        { name: 'Мікс',       hex: 'linear-gradient(135deg,#f5f0eb,#f1c40f,#e91e8c)' },
-    ],
-    'Тюльпани':    [
-        { name: 'Червоні',    hex: '#c0392b' },
-        { name: 'Рожеві',     hex: '#e91e8c' },
-        { name: 'Білі',       hex: '#f5f0eb' },
-        { name: 'Жовті',      hex: '#f1c40f' },
-        { name: 'Фіолетові',  hex: '#8e44ad' },
-        { name: 'Помаранчеві',hex: '#e67e22' },
-        { name: 'Мікс',       hex: 'linear-gradient(135deg,#c0392b,#f1c40f,#e91e8c)' },
-    ]
+const CATS = {
+    'troyandy':    {label:'Троянди',           desc:'Розкішні троянди — символ любові та вишуканості'},
+    'khrizantema': {label:'Хризантема',        desc:'Ніжні хризантеми для особливих моментів'},
+    'tulpany':     {label:'Тюльпани',          desc:'Яскраві тюльпани — весняний настрій'},
+    'kulky':       {label:'Кульки',            desc:'Святкові кульки для будь-якого свята'},
+    'solodki':     {label:'Солодкі букети',    desc:'Букети з цукерок та солодощів'},
+    'igrashky':    {label:"М'які іграшки",     desc:"М'які іграшки — ніжний подарунок"},
+    'topery':      {label:'Топери',            desc:'Красиві топери для тортів та композицій'},
+    'korobky':     {label:'Коробки та кошики', desc:'Елегантні коробки, сумочки та кошики'},
+    'listivky':    {label:'Листівки',          desc:'Красиві листівки для будь-якого приводу'},
+    'sumochky':    {label:'Сумочки квітів',    desc:'Стильні сумочки з квітами'},
 };
 
-let currentFlowerType = 'Троянди';
-let currentColor = null;
-let customQty = 1;
-let customFlowers = []; // [{type, color, qty}]
-let buildMessenger = 'telegram';
-
-// Render colors for selected flower type
-function renderColors(type) {
-    const grid = document.getElementById('colorGrid');
-    const colors = FLOWER_COLORS[type] || [];
-    grid.innerHTML = colors.map(c => {
-        const dotStyle = c.hex.startsWith('linear')
-            ? `background:${c.hex}; border:none;`
-            : `background:${c.hex};`;
-        return `<button class="color-chip ${currentColor === c.name ? 'active' : ''}"
-                    onclick="selectColor('${c.name}')" data-color="${c.name}">
-                    <span class="color-dot" style="${dotStyle}"></span>
-                    ${c.name}
-                </button>`;
-    }).join('');
-}
-
-function selectFlowerType(btn) {
-    document.querySelectorAll('.flower-type-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFlowerType = btn.dataset.type;
-    currentColor = null;
-    renderColors(currentFlowerType);
-}
-
-function selectColor(name) {
-    currentColor = name;
-    document.querySelectorAll('.color-chip').forEach(c => {
-        c.classList.toggle('active', c.dataset.color === name);
-    });
-}
-
-function changeCustomQty(delta) {
-    customQty = Math.max(1, Math.min(999, customQty + delta));
-    document.getElementById('customQty').textContent = customQty;
-}
-
-function addCustomFlower() {
-    if (!currentColor) {
-        const grid = document.getElementById('colorGrid');
-        grid.style.outline = '2px solid var(--accent)';
-        grid.style.borderRadius = '8px';
-        setTimeout(() => grid.style.outline = '', 1200);
-        return;
-    }
-    customFlowers.push({ type: currentFlowerType, color: currentColor, qty: customQty });
-    renderCustomList();
-    // reset
-    currentColor = null;
-    customQty = 1;
-    document.getElementById('customQty').textContent = '1';
-    document.querySelectorAll('.color-chip').forEach(c => c.classList.remove('active'));
-}
-
-function removeCustomFlower(idx) {
-    customFlowers.splice(idx, 1);
-    renderCustomList();
-}
-
-function renderCustomList() {
-    const section = document.getElementById('customListSection');
-    const list = document.getElementById('customList');
-    const footer = document.getElementById('buildFooter');
-    const empty = document.getElementById('buildEmpty');
-
-    if (customFlowers.length === 0) {
-        section.style.display = 'none';
-        footer.style.display = 'none';
-        empty.style.display = 'flex';
-        return;
-    }
-
-    section.style.display = 'block';
-    footer.style.display = 'block';
-    empty.style.display = 'none';
-
-    list.innerHTML = customFlowers.map((f, i) => `
-        <div class="custom-item">
-            <div class="custom-item-info">
-                <div class="custom-item-name">${f.type}</div>
-                <div class="custom-item-detail">${f.color} · ${f.qty} шт.</div>
-            </div>
-            <button class="custom-item-remove" onclick="removeCustomFlower(${i})">×</button>
-        </div>
-    `).join('');
-}
-
-function selectBuildMessenger(m) {
-    buildMessenger = m;
-    document.querySelectorAll('[data-bm]').forEach(b => b.classList.remove('active'));
-    document.querySelector(`[data-bm="${m}"]`).classList.add('active');
-
-    const hint = document.getElementById('buildCopyHint');
-    const hintText = document.getElementById('buildCopyHintText');
-    if (m === 'viber') {
-        hintText.innerHTML = 'Після відкриття Viber — натисніть і утримайте поле вводу та оберіть <b>«Вставити»</b> ✨';
-        hint.style.display = 'flex';
-    } else if (m === 'instagram') {
-        hintText.innerHTML = 'Після відкриття Instagram Direct — натисніть і утримайте поле вводу та оберіть <b>«Вставити»</b> ✨';
-        hint.style.display = 'flex';
-    } else {
-        hint.style.display = 'none';
-    }
-}
-
-function orderCustomBouquet() {
-    if (customFlowers.length === 0) return;
-    const note = document.getElementById('customNote').value.trim();
-    const lines = customFlowers.map(f => `• ${f.type} (${f.color}) — ${f.qty} шт.`).join('\n');
-    let message = `Вітаю! 🌸 Хочу замовити власний букет:\n\n${lines}`;
-    if (note) message += `\n\n📝 Побажання: ${note}`;
-    message += `\n\nПідкажіть, будь ласка, актуальну ціну та як оформити замовлення?`;
-    sendToMessenger(buildMessenger, message);
-    toggleCart();
-}
-
-// Tab switching
-function switchTab(tab) {
-    document.getElementById('tabCart').classList.toggle('active', tab === 'cart');
-    document.getElementById('tabBuild').classList.toggle('active', tab === 'build');
-    document.getElementById('panelCart').style.display = tab === 'cart' ? 'flex' : 'none';
-    document.getElementById('panelBuild').style.display = tab === 'build' ? 'flex' : 'none';
-}
-
-// Init color grid on page load
-document.addEventListener('DOMContentLoaded', () => {
-    renderColors('Троянди');
-});
-
-
-/* ════════════════════════════════
-   NEW CATEGORY SYSTEM
-   ════════════════════════════════ */
-
-function showCategory(catId) {
-    // Hide all panels
-    document.querySelectorAll('.cat-panel').forEach(p => p.style.display = 'none');
-    // Show selected
-    const panel = document.getElementById('panel-' + catId);
-    if (panel) panel.style.display = 'block';
-
-    // Update active sidebar item
-    document.querySelectorAll('.cat-side-item').forEach(b => b.classList.remove('active'));
-    const activeBtn = document.querySelector(`[data-catid="${catId}"]`);
-    if (activeBtn) activeBtn.classList.add('active');
-
-    // Scroll to catalog on mobile
-    if (window.innerWidth < 900) {
-        document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
-    }
-}
-
-// Init: show all-panel on load
-document.addEventListener('DOMContentLoaded', () => {
-    showCategory('all');
-    renderColors('Троянди');
-});
-
-
-/* ═══════════════════════════════════════════
-   CATALOG FILTER
-   ═══════════════════════════════════════════ */
-
-const CATS={"troyandy":{"label":"Троянди","desc":"Розкішні троянди — символ любові та вишуканості"},"khrizantema":{"label":"Хризантема","desc":"Ніжні хризантеми — для особливих моментів"},"tulpany":{"label":"Тюльпани","desc":"Яскраві тюльпани — весняний настрій у букеті"},"kulky":{"label":"Кульки","desc":"Святкові кульки для будь-якого свята"},"solodki":{"label":"Солодкі букети","desc":"Букети з цукерок та солодощів — оригінальний подарунок"},"igrashky":{"label":"М'які іграшки","desc":"М'які іграшки — ніжний подарунок для коханих"},"topery":{"label":"Топери","desc":"Красиві топери для тортів та святкових композицій"},"korobky":{"label":"Коробки та кошики","desc":"Елегантні коробки, сумочки та кошики з квітами"},"listivky":{"label":"Листівки","desc":"Красиві листівки для будь-якого приводу"},"sumochky":{"label":"Сумочки квітів","desc":"Стильні сумочки з квітами — модний подарунок"}};
-
-function showCat(btn, catId) {
-    document.querySelectorAll('.csi').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const info = catId === 'all'
-        ? {label: 'Всі категорії', desc: 'Весь асортимент Imperial — від класичних букетів до унікальних подарунків'}
-        : (CATS[catId] || {label: catId, desc: ''});
-
-    document.getElementById('catTitle').textContent = info.label;
-    document.getElementById('catDesc').textContent = info.desc;
-
-    let visible = 0;
-    document.querySelectorAll('.pc').forEach(card => {
-        const show = catId === 'all' || card.dataset.cat === catId;
-        card.classList.toggle('hidden', !show);
-        if (show) visible++;
-    });
-
-    document.getElementById('catEmpty').style.display = visible === 0 ? 'block' : 'none';
-    document.getElementById('pcGrid').style.display = visible === 0 ? 'none' : 'grid';
-
-    if (window.innerWidth < 900) {
-        document.getElementById('catalog').scrollIntoView({behavior: 'smooth', block: 'start'});
-    }
-}
-
-/* ═══════════════════════════════════════════
-   NAV CATALOG DROPDOWN
-   ═══════════════════════════════════════════ */
-
-function toggleCatMenu() {
-    const menu = document.getElementById('navCatMenu');
-    const arrow = document.getElementById('catArrow');
-    const trigger = menu.previousElementSibling;
-    const isOpen = menu.classList.contains('open');
-
-    menu.classList.toggle('open', !isOpen);
-    arrow.classList.toggle('open', !isOpen);
-    trigger.classList.toggle('open', !isOpen);
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function(e) {
-    const wrap = document.querySelector('.nav-cat-wrap');
-    if (wrap && !wrap.contains(e.target)) {
-        document.getElementById('navCatMenu')?.classList.remove('open');
-        document.getElementById('catArrow')?.classList.remove('open');
-        document.querySelector('.nav-cat-trigger')?.classList.remove('open');
-    }
-});
-
-function openCat(catId) {
-    // Close dropdown
-    document.getElementById('navCatMenu')?.classList.remove('open');
-    document.getElementById('catArrow')?.classList.remove('open');
-    document.querySelector('.nav-cat-trigger')?.classList.remove('open');
-
-    // Update catalog header
-    const info = catId === 'all'
-        ? {label: 'Всі категорії', desc: 'Весь асортимент Imperial — від класичних букетів до унікальних подарунків'}
-        : (CATS[catId] || {label: catId, desc: ''});
-
-    document.getElementById('catTitle').textContent = info.label;
-    document.getElementById('catDesc').textContent = info.desc;
-
-    // Filter cards
-    let visible = 0;
-    document.querySelectorAll('.pc').forEach(card => {
-        const show = catId === 'all' || card.dataset.cat === catId;
-        card.classList.toggle('hidden', !show);
-        if (show) visible++;
-    });
-
-    document.getElementById('catEmpty').style.display = visible === 0 ? 'block' : 'none';
-    document.getElementById('pcGrid').style.display = visible === 0 ? 'none' : 'grid';
-
-    // Scroll to catalog
-    document.getElementById('catalog').scrollIntoView({behavior: 'smooth', block: 'start'});
-}
-
-/* ═══════════════════════════════════════════
-   CATALOG INIT — show 4 per category on load
-   ═══════════════════════════════════════════ */
+// При завантаженні — показати по 4 з кожної категорії
 document.addEventListener('DOMContentLoaded', function() {
-    // On load: show max 4 items per category as preview
     showCatalogOverview();
+    renderColors('Троянди');
 });
 
 function showCatalogOverview() {
@@ -586,28 +184,38 @@ function showCatalogOverview() {
     document.querySelectorAll('.pc').forEach(card => {
         const cat = card.dataset.cat;
         countPerCat[cat] = (countPerCat[cat] || 0) + 1;
-        // Show only first 4 per category
         card.classList.toggle('hidden', countPerCat[cat] > 4);
     });
-    document.getElementById('catTitle').textContent = 'Всі категорії';
-    document.getElementById('catDesc').textContent = 'Весь асортимент Imperial — від класичних букетів до унікальних подарунків';
-    document.getElementById('catEmpty').style.display = 'none';
-    document.getElementById('pcGrid').style.display = 'grid';
+    const titleEl = document.getElementById('catTitle');
+    const descEl  = document.getElementById('catDesc');
+    if (titleEl) titleEl.textContent = 'Всі категорії';
+    if (descEl)  descEl.textContent  = 'Весь асортимент Imperial — від класичних букетів до унікальних подарунків';
+    const emptyEl = document.getElementById('catEmpty');
+    const gridEl  = document.getElementById('pcGrid');
+    if (emptyEl) emptyEl.style.display = 'none';
+    if (gridEl)  gridEl.style.display  = 'grid';
 }
 
-// Override openCat and showCat to show ALL items of selected category
 function openCat(catId) {
-    // Close dropdown
-    document.getElementById('navCatMenu')?.classList.remove('open');
-    document.getElementById('catArrow')?.classList.remove('open');
-    document.querySelector('.nav-cat-trigger')?.classList.remove('open');
+    // Закрити дропдаун
+    const menu    = document.getElementById('navCatMenu');
+    const arrow   = document.getElementById('catArrow');
+    const trigger = document.querySelector('.nav-cat-trigger');
+    if (menu)    menu.classList.remove('open');
+    if (arrow)   arrow.classList.remove('open');
+    if (trigger) trigger.classList.remove('open');
+
+    const titleEl = document.getElementById('catTitle');
+    const descEl  = document.getElementById('catDesc');
+    const emptyEl = document.getElementById('catEmpty');
+    const gridEl  = document.getElementById('pcGrid');
 
     if (catId === 'all') {
         showCatalogOverview();
     } else {
         const info = CATS[catId] || {label: catId, desc: ''};
-        document.getElementById('catTitle').textContent = info.label;
-        document.getElementById('catDesc').textContent = info.desc;
+        if (titleEl) titleEl.textContent = info.label;
+        if (descEl)  descEl.textContent  = info.desc;
 
         let visible = 0;
         document.querySelectorAll('.pc').forEach(card => {
@@ -615,9 +223,36 @@ function openCat(catId) {
             card.classList.toggle('hidden', !show);
             if (show) visible++;
         });
-        document.getElementById('catEmpty').style.display = visible === 0 ? 'block' : 'none';
-        document.getElementById('pcGrid').style.display = visible === 0 ? 'none' : 'grid';
+        if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+        if (gridEl)  gridEl.style.display  = visible === 0 ? 'none' : 'grid';
     }
 
-    document.getElementById('catalog').scrollIntoView({behavior: 'smooth', block: 'start'});
+    // Прокрутка до каталогу
+    const catSection = document.getElementById('catalog');
+    if (catSection) catSection.scrollIntoView({behavior: 'smooth', block: 'start'});
 }
+
+// Дропдаун каталогу
+function toggleCatMenu() {
+    const menu    = document.getElementById('navCatMenu');
+    const arrow   = document.getElementById('catArrow');
+    const trigger = document.querySelector('.nav-cat-trigger');
+    if (!menu) return;
+    const isOpen = menu.classList.contains('open');
+    menu.classList.toggle('open', !isOpen);
+    if (arrow)   arrow.classList.toggle('open', !isOpen);
+    if (trigger) trigger.classList.toggle('open', !isOpen);
+}
+
+// Закрити дропдаун при кліку поза ним
+document.addEventListener('click', function(e) {
+    const wrap = document.querySelector('.nav-cat-wrap');
+    if (wrap && !wrap.contains(e.target)) {
+        const menu    = document.getElementById('navCatMenu');
+        const arrow   = document.getElementById('catArrow');
+        const trigger = document.querySelector('.nav-cat-trigger');
+        if (menu)    menu.classList.remove('open');
+        if (arrow)   arrow.classList.remove('open');
+        if (trigger) trigger.classList.remove('open');
+    }
+});
