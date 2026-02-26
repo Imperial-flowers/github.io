@@ -223,15 +223,14 @@ function openCat(catId) {
     document.getElementById('catalog')?.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-// Дропдаун каталогу — position fixed, правильне розміщення
-function toggleCatMenu() {
+function toggleCatMenu(e) {
+    if (e) e.stopPropagation();
     const menu    = document.getElementById('navCatMenu');
     const arrow   = document.getElementById('catArrow');
     const trigger = document.querySelector('.nav-cat-trigger');
     if (!menu) return;
     const isOpen = menu.classList.contains('open');
     if (!isOpen) {
-        // Position dropdown under trigger button
         const rect = trigger.getBoundingClientRect();
         menu.style.left = rect.left + 'px';
         menu.style.top  = (rect.bottom + 6) + 'px';
@@ -241,17 +240,15 @@ function toggleCatMenu() {
     if (trigger) trigger.classList.toggle('open', !isOpen);
 }
 
-// Закрити дропдаун при кліку поза ним
+function closeCatMenu() {
+    document.getElementById('navCatMenu')?.classList.remove('open');
+    document.getElementById('catArrow')?.classList.remove('open');
+    document.querySelector('.nav-cat-trigger')?.classList.remove('open');
+}
+
 document.addEventListener('click', function(e) {
     const wrap = document.querySelector('.nav-cat-wrap');
-    if (wrap && !wrap.contains(e.target)) {
-        const menu    = document.getElementById('navCatMenu');
-        const arrow   = document.getElementById('catArrow');
-        const trigger = document.querySelector('.nav-cat-trigger');
-        if (menu)    menu.classList.remove('open');
-        if (arrow)   arrow.classList.remove('open');
-        if (trigger) trigger.classList.remove('open');
-    }
+    if (wrap && !wrap.contains(e.target)) closeCatMenu();
 });
 
 /* ═══════════════════════════════════════════
@@ -478,10 +475,7 @@ function toggleAcc(id) {
 }
 
 function openAcc(id) {
-    // Close nav dropdown
-    document.getElementById('navCatMenu')?.classList.remove('open');
-    document.getElementById('catArrow')?.classList.remove('open');
-    document.querySelector('.nav-cat-trigger')?.classList.remove('open');
+    closeCatMenu();
 
     if (id === 'all') {
         // Open all
