@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Imperial — Квіти та Подарунки</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #fdf8f3;
-  --white: #ffffff;
+  --white: #fff;
   --text: #2c2420;
   --muted: #8a7a74;
   --border: #e8ddd6;
@@ -21,697 +20,795 @@
 html { scroll-behavior:smooth; }
 body { font-family:'Montserrat',sans-serif; background:var(--bg); color:var(--text); }
 
-/* HEADER */
-.header { position:sticky; top:0; z-index:1000; background:rgba(253,248,243,0.96); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
-.header-inner { max-width:1200px; margin:0 auto; padding:0 24px; height:70px; display:flex; align-items:center; justify-content:space-between; }
+/* ─── HEADER ─── */
+.hdr { position:sticky; top:0; z-index:500; background:rgba(253,248,243,.96); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+.hdr-in { max-width:1200px; margin:0 auto; padding:0 24px; height:70px; display:flex; align-items:center; justify-content:space-between; }
 .logo { font-family:'Playfair Display',serif; font-size:22px; letter-spacing:5px; font-weight:700; color:var(--accent); text-decoration:none; }
 .nav { display:flex; align-items:center; gap:8px; }
 
-.cat-btn-wrap { position:relative; }
-.cat-btn { display:flex; align-items:center; gap:6px; padding:9px 18px; background:none; border:1.5px solid var(--border); border-radius:30px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--text); transition:all .2s; white-space:nowrap; }
-.cat-btn:hover, .cat-btn.open { background:var(--accent-light); border-color:var(--accent); }
-.cat-arrow { font-size:9px; transition:transform .25s; display:inline-block; }
-.cat-btn.open .cat-arrow { transform:rotate(180deg); }
-
-.dropdown { display:none; position:fixed; background:var(--white); border:1px solid var(--border); border-radius:18px; padding:8px; box-shadow:0 20px 60px rgba(44,36,32,.15); z-index:9999; min-width:220px; }
-.dropdown.open { display:block; animation:fadeD .2s ease; }
-@keyframes fadeD { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
-.dd-item { display:flex; align-items:center; justify-content:space-between; width:100%; padding:10px 14px; border:none; background:none; border-radius:10px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:500; color:var(--text); text-align:left; transition:all .15s; }
-.dd-item:hover { background:var(--accent-light); padding-left:18px; }
-.dd-item span { font-size:12px; color:var(--muted); }
+/* catalog dropdown */
+.dd-wrap { position:relative; }
+.dd-trigger { display:flex; align-items:center; gap:6px; padding:9px 18px; background:none; border:1.5px solid var(--border); border-radius:30px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--text); transition:.2s; }
+.dd-trigger:hover, .dd-trigger.is-open { background:var(--accent-light); border-color:var(--accent); }
+.dd-arrow { font-size:9px; transition:transform .25s; }
+.dd-trigger.is-open .dd-arrow { transform:rotate(180deg); }
+.dd-menu { display:none; position:fixed; background:var(--white); border:1px solid var(--border); border-radius:18px; padding:8px; box-shadow:0 20px 60px rgba(44,36,32,.15); z-index:9999; min-width:230px; }
+.dd-menu.is-open { display:block; animation:ddIn .18s ease; }
+@keyframes ddIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+.dd-btn { display:flex; align-items:center; justify-content:space-between; width:100%; padding:10px 14px; border:none; background:none; border-radius:10px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:500; color:var(--text); transition:.15s; }
+.dd-btn:hover { background:var(--accent-light); padding-left:18px; }
+.dd-btn .cnt { font-size:11px; color:var(--muted); }
 .dd-sep { height:1px; background:var(--border); margin:5px 8px; }
-.dd-all { font-weight:700; color:var(--accent); }
+.dd-btn.all { font-weight:700; color:var(--accent); }
 
-.nav-link { padding:9px 16px; background:none; border:none; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); cursor:pointer; border-radius:30px; text-decoration:none; transition:all .2s; white-space:nowrap; }
-.nav-link:hover { color:var(--text); background:var(--accent-light); }
-.build-btn { width:40px; height:40px; border-radius:50%; background:var(--accent-light); border:1.5px solid var(--border); font-size:18px; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; }
+/* nav buttons */
+.nav-a { padding:9px 16px; background:none; border:none; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); cursor:pointer; border-radius:30px; text-decoration:none; transition:.2s; }
+.nav-a:hover { color:var(--text); background:var(--accent-light); }
+.build-btn { width:40px; height:40px; border-radius:50%; background:var(--accent-light); border:1.5px solid var(--border); font-size:18px; cursor:pointer; transition:.2s; display:flex; align-items:center; justify-content:center; }
 .build-btn:hover { background:var(--accent); }
-.cart-btn { display:flex; align-items:center; gap:7px; padding:9px 16px; background:var(--dark); border:none; border-radius:30px; cursor:pointer; color:white; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; transition:all .2s; }
+.cart-btn { display:flex; align-items:center; gap:7px; padding:9px 16px; background:var(--dark); border:none; border-radius:30px; cursor:pointer; color:white; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; transition:.2s; }
 .cart-btn:hover { background:var(--accent); }
-.cart-count { background:rgba(255,255,255,.25); color:white; border-radius:20px; padding:1px 7px; font-size:11px; font-weight:700; min-width:20px; text-align:center; }
+.cart-n { background:rgba(255,255,255,.25); color:white; border-radius:20px; padding:1px 8px; font-size:11px; font-weight:700; min-width:20px; text-align:center; }
 
-/* HERO */
+/* ─── HERO ─── */
 .hero { min-height:100svh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; padding:80px 24px; }
-@keyframes f1 { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-14px) rotate(5deg)} }
-@keyframes f2 { 0%,100%{transform:translateY(0) rotate(5deg)} 50%{transform:translateY(-10px) rotate(-8deg)} }
-@keyframes f3 { 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-18px) rotate(6deg)} }
-.fl { position:absolute; pointer-events:none; opacity:.35; }
+.hero-fl { position:absolute; inset:0; pointer-events:none; }
+.fl { position:absolute; opacity:.35; }
+@keyframes fa { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-14px) rotate(5deg)} }
+@keyframes fb { 0%,100%{transform:translateY(0) rotate(5deg)} 50%{transform:translateY(-10px) rotate(-8deg)} }
+@keyframes fc { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px) rotate(6deg)} }
 .hero-card { background:white; border-radius:28px; padding:60px 50px; max-width:560px; box-shadow:0 20px 60px rgba(44,36,32,.08); border:1px solid var(--border); position:relative; z-index:1; }
-.hero-title { font-family:'Playfair Display',serif; font-style:italic; font-size:46px; font-weight:400; line-height:1.15; color:var(--text); margin-bottom:20px; }
+.hero-title { font-family:'Playfair Display',serif; font-style:italic; font-size:46px; font-weight:400; line-height:1.15; margin-bottom:20px; }
 .hero-sub { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:36px; }
-.hero-cta { display:inline-block; padding:14px 36px; background:var(--dark); color:white; border:none; border-radius:30px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; transition:all .25s; }
-.hero-cta:hover { background:var(--accent); }
+.btn-dark { display:inline-block; padding:14px 36px; background:var(--dark); color:white; border:none; border-radius:30px; cursor:pointer; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; transition:.25s; }
+.btn-dark:hover { background:var(--accent); }
 
-/* CATALOG */
-.catalog { padding:70px 0 90px; }
-.catalog-inner { max-width:900px; margin:0 auto; padding:0 24px; }
-.catalog-hdr { margin-bottom:36px; }
-.catalog-hdr h2 { font-family:'Playfair Display',serif; font-style:italic; font-size:36px; font-weight:400; margin-bottom:8px; }
-.catalog-hdr p { font-size:14px; color:var(--muted); }
+/* ─── SECTIONS ─── */
+.section { padding:70px 0 80px; }
+.section.bg-white { background:white; }
+.sec-in { max-width:1100px; margin:0 auto; padding:0 24px; }
+.sec-hdr { margin-bottom:36px; }
+.sec-hdr h2 { font-family:'Playfair Display',serif; font-style:italic; font-size:36px; font-weight:400; margin-bottom:8px; }
+.sec-hdr p { font-size:14px; color:var(--muted); }
 
-/* Accordion */
-.acc-list { display:flex; flex-direction:column; gap:10px; }
+/* ─── PRODUCT GRID ─── */
+.pg { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; }
+.pc { background:var(--white); border-radius:14px; border:1px solid var(--border); overflow:hidden; transition:.3s; }
+.pc:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(44,36,32,.1); border-color:var(--accent); }
+.pc-img { aspect-ratio:1; overflow:hidden; background:var(--bg); }
+.pc-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+.pc:hover .pc-img img { transform:scale(1.06); }
+.pc-body { padding:10px 12px 14px; }
+.pc-name { font-family:'Playfair Display',serif; font-style:italic; font-size:12px; margin-bottom:10px; line-height:1.4; }
+.pc-btns { display:flex; gap:6px; }
+.pc-cart { flex:1; padding:7px 4px; border-radius:20px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); cursor:pointer; transition:.2s; }
+.pc-cart:hover { background:var(--accent-light); border-color:var(--accent); color:var(--text); }
+.pc-order { flex:1; padding:7px 4px; border-radius:20px; border:none; background:var(--dark); color:white; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; cursor:pointer; transition:.2s; }
+.pc-order:hover { background:var(--accent); }
+
+/* ─── ACCORDION ─── */
+.acc { display:flex; flex-direction:column; gap:10px; }
 .acc-block { background:var(--white); border-radius:16px; border:1px solid var(--border); overflow:hidden; transition:box-shadow .3s,border-color .3s; }
 .acc-block.open { border-color:var(--accent); box-shadow:0 6px 30px rgba(201,149,110,.12); }
 .acc-head { display:flex; align-items:center; gap:14px; width:100%; padding:18px 22px; background:none; border:none; cursor:pointer; text-align:left; transition:background .2s; }
 .acc-head:hover, .acc-block.open .acc-head { background:var(--accent-light); }
 .acc-ico { font-size:22px; flex-shrink:0; }
-.acc-lbl { flex:1; font-size:15px; font-weight:600; color:var(--text); }
-.acc-num { padding:3px 12px; border-radius:20px; background:var(--bg); border:1px solid var(--border); font-size:12px; font-weight:600; color:var(--muted); transition:all .2s; }
+.acc-lbl { flex:1; font-size:15px; font-weight:600; }
+.acc-num { padding:3px 12px; border-radius:20px; background:var(--bg); border:1px solid var(--border); font-size:12px; font-weight:600; color:var(--muted); transition:.2s; }
 .acc-block.open .acc-num { background:var(--accent); border-color:var(--accent); color:white; }
 .acc-arr { font-size:12px; color:var(--muted); transition:transform .3s; flex-shrink:0; }
 .acc-block.open .acc-arr { transform:rotate(180deg); }
-.acc-body { display:none; border-top:1px solid var(--border); padding:22px; animation:slideD .25s ease; }
-.acc-block.open .acc-body { display:block; }
-@keyframes slideD { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
-.acc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:14px; }
+.acc-body { display:none; border-top:1px solid var(--border); padding:22px; }
+.acc-block.open .acc-body { display:block; animation:accIn .25s ease; }
+@keyframes accIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
 
-/* Product card */
-.pc { background:var(--white); border-radius:14px; border:1px solid var(--border); overflow:hidden; transition:all .3s; }
-.pc:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(44,36,32,.1); border-color:var(--accent); }
-.pc-img { aspect-ratio:1; overflow:hidden; background:var(--bg); }
-.pc-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
-.pc:hover .pc-img img { transform:scale(1.06); }
-.pc-body { padding:10px 12px 13px; }
-.pc-name { font-family:'Playfair Display',serif; font-style:italic; font-size:12px; color:var(--text); margin-bottom:10px; line-height:1.4; }
-.pc-btns { display:flex; gap:6px; }
-.pc-cart { flex:1; padding:7px 4px; border-radius:20px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); cursor:pointer; transition:all .2s; }
-.pc-cart:hover { background:var(--accent-light); border-color:var(--accent); color:var(--text); }
-.pc-order { flex:1; padding:7px 4px; border-radius:20px; border:none; background:var(--dark); color:white; font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; cursor:pointer; transition:all .2s; }
-.pc-order:hover { background:var(--accent); }
-
-/* CONTACTS */
-.contacts { padding:70px 0 90px; background:white; }
+/* ─── CONTACTS ─── */
 .contacts-inner { max-width:600px; margin:0 auto; padding:0 24px; text-align:center; }
 .contacts-inner h2 { font-family:'Playfair Display',serif; font-style:italic; font-size:36px; font-weight:400; margin-bottom:10px; }
 .contacts-inner > p { font-size:14px; color:var(--muted); margin-bottom:36px; line-height:1.7; }
-.contact-cards { display:flex; flex-direction:column; gap:12px; }
-.contact-card { display:flex; align-items:center; gap:14px; padding:18px 22px; background:var(--bg); border:1px solid var(--border); border-radius:16px; cursor:pointer; color:var(--text); font-size:14px; font-weight:500; transition:all .2s; text-align:left; }
-.contact-card:hover { background:var(--accent-light); border-color:var(--accent); transform:translateX(4px); }
-.contact-ico { font-size:22px; flex-shrink:0; }
+.cc { display:flex; flex-direction:column; gap:12px; }
+.cc-btn { display:flex; align-items:center; gap:14px; padding:18px 22px; background:var(--bg); border:1px solid var(--border); border-radius:16px; cursor:pointer; color:var(--text); font-family:'Montserrat',sans-serif; font-size:14px; font-weight:500; transition:.2s; text-align:left; }
+.cc-btn:hover { background:var(--accent-light); border-color:var(--accent); transform:translateX(4px); }
+.cc-ico { font-size:22px; flex-shrink:0; }
 
-/* FOOTER */
-.footer { background:var(--dark); color:rgba(255,255,255,.5); text-align:center; padding:24px; font-size:12px; letter-spacing:1px; text-transform:uppercase; }
+/* ─── FOOTER ─── */
+footer { background:var(--dark); color:rgba(255,255,255,.5); text-align:center; padding:24px; font-size:12px; letter-spacing:1px; text-transform:uppercase; }
 
-/* OVERLAY + SIDEBAR */
-.overlay { display:none; position:fixed; inset:0; background:rgba(44,36,32,.4); z-index:2000; backdrop-filter:blur(2px); }
-.overlay.open { display:block; }
-.sidebar { position:fixed; top:0; right:-420px; width:400px; height:100vh; background:var(--white); z-index:2001; transition:right .35s ease; display:flex; flex-direction:column; box-shadow:-10px 0 40px rgba(44,36,32,.15); }
-.sidebar.open { right:0; }
-.sb-head { padding:18px 22px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+/* ─── OVERLAY + SIDEBAR ─── */
+.overlay { display:none; position:fixed; inset:0; background:rgba(44,36,32,.4); z-index:1000; backdrop-filter:blur(2px); }
+.overlay.on { display:block; }
+.sb { position:fixed; top:0; right:-420px; width:400px; height:100vh; background:var(--white); z-index:1001; transition:right .35s ease; display:flex; flex-direction:column; box-shadow:-10px 0 40px rgba(44,36,32,.15); }
+.sb.on { right:0; }
+.sb-hdr { padding:18px 22px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
 .sb-tabs { display:flex; gap:4px; }
-.sb-tab { padding:7px 16px; border-radius:20px; border:none; background:none; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; cursor:pointer; color:var(--muted); transition:all .2s; }
-.sb-tab.active { background:var(--dark); color:white; }
-.sb-close { width:34px; height:34px; border-radius:50%; border:1.5px solid var(--border); background:none; font-size:18px; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; transition:all .2s; }
-.sb-close:hover { background:var(--border); }
+.sb-tab { padding:7px 16px; border-radius:20px; border:none; background:none; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; cursor:pointer; color:var(--muted); transition:.2s; }
+.sb-tab.on { background:var(--dark); color:white; }
+.sb-x { width:34px; height:34px; border-radius:50%; border:1.5px solid var(--border); background:none; font-size:18px; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; transition:.2s; }
+.sb-x:hover { background:var(--border); }
 .sb-panel { display:none; flex-direction:column; flex:1; overflow:hidden; }
-.sb-panel.active { display:flex; }
+.sb-panel.on { display:flex; }
 .sb-scroll { flex:1; overflow-y:auto; padding:16px 22px; }
-.sb-footer { padding:14px 22px; border-top:1px solid var(--border); }
+.sb-foot { padding:14px 22px; border-top:1px solid var(--border); }
 
-/* Cart */
+/* cart */
 .cart-empty { text-align:center; padding:60px 20px; color:var(--muted); }
 .cart-empty span { font-size:44px; display:block; margin-bottom:12px; opacity:.3; }
 .cart-empty p { font-size:15px; font-weight:500; margin-bottom:6px; }
-.cart-item { display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid var(--border); }
+.ci { display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid var(--border); }
 .ci-name { flex:1; font-size:13px; line-height:1.4; }
-.ci-controls { display:flex; align-items:center; gap:6px; }
-.ci-qbtn { width:26px; height:26px; border-radius:50%; border:1.5px solid var(--border); background:none; font-size:14px; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; transition:all .2s; }
-.ci-qbtn:hover { border-color:var(--accent); color:var(--accent); }
-.ci-qty { font-size:13px; font-weight:600; min-width:18px; text-align:center; }
+.ci-ctrl { display:flex; align-items:center; gap:6px; }
+.ci-q { width:26px; height:26px; border-radius:50%; border:1.5px solid var(--border); background:none; font-size:14px; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; transition:.2s; }
+.ci-q:hover { border-color:var(--accent); color:var(--accent); }
+.ci-num { font-size:13px; font-weight:600; min-width:18px; text-align:center; }
 .ci-rm { width:26px; height:26px; border-radius:50%; border:none; background:none; font-size:18px; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; transition:color .2s; }
 .ci-rm:hover { color:#c0392b; }
 .cart-total { font-size:13px; color:var(--muted); margin-bottom:12px; }
 .cart-total b { color:var(--text); }
 .ms-lbl { font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
 .ms-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-bottom:10px; }
-.ms-btn { padding:9px 6px; border-radius:10px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; cursor:pointer; color:var(--muted); transition:all .2s; }
-.ms-btn:hover, .ms-btn.active { background:var(--accent-light); border-color:var(--accent); color:var(--text); }
-.order-btn { width:100%; padding:14px; border-radius:14px; background:var(--dark); border:none; color:white; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:all .25s; }
+.ms-btn { padding:9px 6px; border-radius:10px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; cursor:pointer; color:var(--muted); transition:.2s; }
+.ms-btn:hover, .ms-btn.on { background:var(--accent-light); border-color:var(--accent); color:var(--text); }
+.order-btn { width:100%; padding:14px; border-radius:14px; background:var(--dark); border:none; color:white; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:.25s; }
 .order-btn:hover { background:var(--accent); }
 
-/* Builder */
+/* builder */
 .bld-lbl { font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
 .ft-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:18px; }
-.ft-btn { padding:12px 6px; border-radius:12px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; cursor:pointer; color:var(--muted); transition:all .2s; text-align:center; }
-.ft-btn .ft-ico { display:block; font-size:22px; margin-bottom:4px; }
-.ft-btn:hover, .ft-btn.active { background:var(--accent-light); border-color:var(--accent); color:var(--text); }
-.color-grid { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px; min-height:36px; }
-.color-chip { display:flex; align-items:center; gap:6px; padding:6px 12px; border-radius:20px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:500; cursor:pointer; color:var(--muted); transition:all .2s; }
-.color-chip.active { border-color:var(--accent); background:var(--accent-light); color:var(--text); }
-.color-dot { width:12px; height:12px; border-radius:50%; border:1px solid rgba(0,0,0,.1); flex-shrink:0; }
+.ft-btn { padding:12px 6px; border-radius:12px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:600; cursor:pointer; color:var(--muted); transition:.2s; text-align:center; }
+.ft-btn .fi { display:block; font-size:22px; margin-bottom:4px; }
+.ft-btn:hover, .ft-btn.on { background:var(--accent-light); border-color:var(--accent); color:var(--text); }
+.cg { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px; min-height:36px; }
+.cc2 { display:flex; align-items:center; gap:6px; padding:6px 12px; border-radius:20px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:500; cursor:pointer; color:var(--muted); transition:.2s; }
+.cc2.on { border-color:var(--accent); background:var(--accent-light); color:var(--text); }
+.cd { width:12px; height:12px; border-radius:50%; border:1px solid rgba(0,0,0,.1); flex-shrink:0; }
 .qty-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
-.qty-controls { display:flex; align-items:center; gap:10px; }
-.qty-btn { width:32px; height:32px; border-radius:50%; border:1.5px solid var(--border); background:none; font-size:18px; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; transition:all .2s; }
-.qty-btn:hover { border-color:var(--accent); color:var(--accent); }
-.qty-num { font-size:16px; font-weight:600; min-width:28px; text-align:center; }
-.add-btn { width:100%; padding:12px; border-radius:12px; background:var(--accent-light); border:1.5px solid var(--accent); color:var(--accent); font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:all .2s; margin-bottom:18px; }
+.qty-ctrl { display:flex; align-items:center; gap:10px; }
+.qty-b { width:32px; height:32px; border-radius:50%; border:1.5px solid var(--border); background:none; font-size:18px; cursor:pointer; color:var(--muted); display:flex; align-items:center; justify-content:center; transition:.2s; }
+.qty-b:hover { border-color:var(--accent); color:var(--accent); }
+.qty-n { font-size:16px; font-weight:600; min-width:28px; text-align:center; }
+.add-btn { width:100%; padding:12px; border-radius:12px; background:var(--accent-light); border:1.5px solid var(--accent); color:var(--accent); font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:.2s; margin-bottom:18px; }
 .add-btn:hover { background:var(--accent); color:white; }
 .bld-list { margin-bottom:14px; }
 .bld-item { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); }
-.bld-info { flex:1; }
-.bld-title { font-size:13px; font-weight:600; }
-.bld-detail { font-size:11px; color:var(--muted); }
+.bi-info { flex:1; }
+.bi-t { font-size:13px; font-weight:600; }
+.bi-d { font-size:11px; color:var(--muted); }
 .bld-note { width:100%; padding:10px 14px; border-radius:12px; border:1.5px solid var(--border); background:var(--bg); font-family:'Montserrat',sans-serif; font-size:13px; resize:none; outline:none; margin-bottom:12px; color:var(--text); }
 .bld-note:focus { border-color:var(--accent); }
 
-/* MODAL */
-.modal-wrap { display:none; position:fixed; inset:0; z-index:3000; background:rgba(44,36,32,.45); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:20px; }
-.modal-wrap.open { display:flex; }
+/* modal */
+.modal-bg { display:none; position:fixed; inset:0; z-index:2000; background:rgba(44,36,32,.45); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:20px; }
+.modal-bg.on { display:flex; }
 .modal { background:white; border-radius:24px; padding:36px; width:100%; max-width:440px; max-height:calc(100svh - 40px); overflow-y:auto; box-shadow:0 30px 80px rgba(44,36,32,.2); }
 .modal h3 { font-family:'Playfair Display',serif; font-style:italic; font-size:22px; font-weight:400; margin-bottom:6px; }
 .modal-sub { font-size:13px; color:var(--muted); margin-bottom:22px; }
 .modal-btns { display:flex; flex-direction:column; gap:10px; }
-.modal-btn { display:flex; align-items:center; gap:12px; padding:14px 18px; border-radius:14px; border:1.5px solid var(--border); background:var(--bg); font-family:'Montserrat',sans-serif; font-size:13px; font-weight:500; cursor:pointer; color:var(--text); transition:all .2s; text-align:left; }
+.modal-btn { display:flex; align-items:center; gap:12px; padding:14px 18px; border-radius:14px; border:1.5px solid var(--border); background:var(--bg); font-family:'Montserrat',sans-serif; font-size:13px; font-weight:500; cursor:pointer; color:var(--text); transition:.2s; text-align:left; }
 .modal-btn:hover { background:var(--accent-light); border-color:var(--accent); transform:translateX(4px); }
-.modal-btn span { font-size:22px; }
-.modal-cancel { width:100%; margin-top:14px; padding:12px; border-radius:12px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; cursor:pointer; color:var(--muted); transition:all .2s; }
+.modal-btn .mi { font-size:22px; }
+.modal-cancel { width:100%; margin-top:14px; padding:12px; border-radius:12px; border:1.5px solid var(--border); background:none; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; cursor:pointer; color:var(--muted); transition:.2s; }
 .modal-cancel:hover { background:var(--border); }
 
-/* Mobile */
+/* toast */
+.toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--dark); color:white; padding:16px 24px; border-radius:16px; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:500; z-index:9999; box-shadow:0 10px 40px rgba(0,0,0,.3); text-align:center; line-height:1.6; max-width:320px; opacity:0; transition:all .3s ease; pointer-events:none; }
+.toast.on { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* mobile */
 @media(max-width:768px) {
-  .sidebar { width:min(100vw,400px); }
+  .sb { width:min(100vw,400px); }
   .hero-title { font-size:32px; }
   .hero-card { padding:40px 28px; }
-  .acc-grid { grid-template-columns:repeat(2,1fr); }
+  .pg { grid-template-columns:repeat(2,1fr); gap:12px; }
 }
 @media(max-width:480px) {
-  .nav-link { display:none; }
+  .nav-a { display:none; }
   .hero-card { padding:30px 18px; }
   .hero-title { font-size:27px; }
 }
-
-/* BOUQUETS */
-.bouquets { padding:70px 0 80px; background:white; }
-.bouquets-inner { max-width:1100px; margin:0 auto; padding:0 24px; }
-.bq-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:18px;
-}
-@media(max-width:600px){ .bq-grid{ grid-template-columns:repeat(2,1fr); gap:12px; } }
 </style>
 </head>
 <body>
 
 <!-- HEADER -->
-<header class="header">
-  <div class="header-inner">
+<header class="hdr">
+  <div class="hdr-in">
     <a href="#" class="logo">IMPERIAL</a>
     <nav class="nav">
-      <div class="cat-btn-wrap">
-        <button class="cat-btn" id="catBtn" onclick="toggleDd(event)">
-          Каталог <span class="cat-arrow">▾</span>
+      <div class="dd-wrap">
+        <button class="dd-trigger" id="ddBtn" onclick="ddToggle(event)">
+          Каталог <span class="dd-arrow">▾</span>
         </button>
-        <div class="dropdown" id="dropdown">
-          <button class="dd-item dd-all" onclick="document.getElementById('bouquets').scrollIntoView({behavior:'smooth'});closeDd()">💐 Букети <span>9</span></button>
+        <div class="dd-menu" id="ddMenu">
+          <button class="dd-btn all" onclick="ddGo('bouquets')">💐 Букети <span class="cnt">9</span></button>
           <div class="dd-sep"></div>
-                    <button class="dd-item" onclick="goAcc('kulky')">🎈 Кульки <span>5</span></button>
-          <button class="dd-item" onclick="goAcc('solodki')">🍬 Солодкі букети <span>6</span></button>
-          <button class="dd-item" onclick="goAcc('igrashky')">🧸 М'які іграшки <span>8</span></button>
-          <button class="dd-item" onclick="goAcc('korobky')">🎁 Коробки та кошики <span>10</span></button>
-          <button class="dd-item" onclick="goAcc('listivky')">💌 Листівки <span>27</span></button>
-          <button class="dd-item" onclick="goAcc('sumochky')">👜 Сумочки квітів <span>4</span></button>
-          <button class="dd-item" onclick="goAcc('troyandy')">🌹 Троянди <span>9</span></button>
-          <button class="dd-item" onclick="goAcc('khrizantema')">🌸 Хризантема <span>8</span></button>
-          <button class="dd-item" onclick="goAcc('tulpany')">🌷 Тюльпани <span>5</span></button>
-          <button class="dd-item" onclick="goAcc('topery')">✨ Топери <span>10</span></button>
+          <button class="dd-btn" onclick="ddGo('kulky')">🎈 Кульки <span class="cnt">5</span></button>
+          <button class="dd-btn" onclick="ddGo('solodki')">🍬 Солодкі букети <span class="cnt">6</span></button>
+          <button class="dd-btn" onclick="ddGo('igrashky')">🧸 М'які іграшки <span class="cnt">8</span></button>
+          <button class="dd-btn" onclick="ddGo('korobky')">🎁 Коробки та кошики <span class="cnt">10</span></button>
+          <button class="dd-btn" onclick="ddGo('listivky')">💌 Листівки <span class="cnt">27</span></button>
+          <button class="dd-btn" onclick="ddGo('sumochky')">👜 Сумочки квітів <span class="cnt">4</span></button>
+          <button class="dd-btn" onclick="ddGo('troyandy')">🌹 Троянди <span class="cnt">9</span></button>
+          <button class="dd-btn" onclick="ddGo('khrizantema')">🌸 Хризантема <span class="cnt">8</span></button>
+          <button class="dd-btn" onclick="ddGo('tulpany')">🌷 Тюльпани <span class="cnt">5</span></button>
+          <button class="dd-btn" onclick="ddGo('topery')">✨ Топери <span class="cnt">10</span></button>
           <div class="dd-sep"></div>
-          <button class="dd-item dd-all" onclick="allAcc()">💐 Розгорнути все</button>
+          <button class="dd-btn all" onclick="ddGo('catalog')">📋 Весь каталог</button>
         </div>
       </div>
-      <a href="#contacts" class="nav-link">Контакти</a>
-      <button class="build-btn" onclick="openSb('build')" title="Скласти букет">🌸</button>
-      <button class="cart-btn" onclick="openSb('cart')">🛒 <span class="cart-count" id="cartCount">0</span></button>
+      <a href="#contacts" class="nav-a">Контакти</a>
+      <button class="build-btn" onclick="sbOpen('build')" title="Скласти букет">🌸</button>
+      <button class="cart-btn" onclick="sbOpen('cart')">🛒 <span class="cart-n" id="cartN">0</span></button>
     </nav>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero" id="hero">
-  <div class="fl" style="left:4%;top:15%;width:70px;height:70px;animation:f1 7s ease-in-out infinite">
-    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#e8b4a0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
-  </div>
-  <div class="fl" style="left:6%;top:60%;width:50px;height:50px;animation:f2 9s ease-in-out infinite 1s">
-    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#d4a0b0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#d490a4" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#d490a4" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
-  </div>
-  <div class="fl" style="left:3%;top:82%;width:40px;height:40px;animation:f3 8s ease-in-out infinite 2s">
-    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#e8b4a0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f9d0c0" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f9d0c0" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8a890" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f9d0c0" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f9d0c0" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8a890" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
-  </div>
-  <div class="fl" style="right:5%;top:12%;width:80px;height:80px;animation:f2 6s ease-in-out infinite .5s">
-    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#e8b4a0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
-  </div>
-  <div class="fl" style="right:7%;top:50%;width:55px;height:55px;animation:f1 10s ease-in-out infinite 3s">
-    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#d4a0b0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#d490a4" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#d490a4" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
-  </div>
-  <div class="fl" style="right:4%;top:75%;width:44px;height:44px;animation:f3 7s ease-in-out infinite 1.5s">
-    <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#e8b4a0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
+<section class="hero" id="home">
+  <div class="hero-fl">
+    <div class="fl" style="left:4%;top:15%;width:70px;height:70px;animation:fa 7s ease-in-out infinite">
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#e8b4a0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
+    </div>
+    <div class="fl" style="left:6%;top:60%;width:50px;height:50px;animation:fb 9s ease-in-out infinite 1s">
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#d4a0b0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#d490a4" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#d490a4" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
+    </div>
+    <div class="fl" style="left:3%;top:82%;width:40px;height:40px;animation:fc 8s ease-in-out infinite 2s">
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#e8b4a0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f9d0c0" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f9d0c0" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8a890" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f9d0c0" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f9d0c0" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8a890" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
+    </div>
+    <div class="fl" style="right:5%;top:12%;width:80px;height:80px;animation:fb 6s ease-in-out infinite .5s">
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#e8b4a0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
+    </div>
+    <div class="fl" style="right:7%;top:50%;width:55px;height:55px;animation:fa 10s ease-in-out infinite 3s">
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#d4a0b0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#d490a4" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#e8b4c4" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#d490a4" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
+    </div>
+    <div class="fl" style="right:4%;top:75%;width:44px;height:44px;animation:fc 7s ease-in-out infinite 1.5s">
+      <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="7" fill="#e8b4a0"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(0 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(60 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(120 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(180 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#f2c4b0" transform="rotate(240 30 30)"/><ellipse cx="30" cy="14" rx="7" ry="11" fill="#eda090" transform="rotate(300 30 30)"/><circle cx="30" cy="30" r="6" fill="#f5d5a0"/></svg>
+    </div>
   </div>
   <div class="hero-card">
     <h1 class="hero-title">Ексклюзивні квіти для ваших особливих моментів</h1>
     <p class="hero-sub">Кожен букет — це витвір мистецтва, створений з любов'ю та увагою до найменших деталей.</p>
-    <button class="hero-cta" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Переглянути букети</button>
+    <button class="btn-dark" onclick="scrollTo('bouquets')">Переглянути букети</button>
   </div>
 </section>
 
-<!-- BOUQUETS -->
-<section class="bouquets" id="bouquets">
-  <div class="bouquets-inner">
-    <div class="catalog-hdr">
+<!-- БУКЕТИ -->
+<section class="section bg-white" id="bouquets">
+  <div class="sec-in">
+    <div class="sec-hdr">
       <h2>Букети</h2>
       <p>Наші авторські букети — кожен створений з душею</p>
     </div>
-    <div class="bq-grid" id="bqGrid"></div>
+    <div class="pg" id="pgBouquets"></div>
   </div>
 </section>
 
-<!-- CATALOG -->
-<section class="catalog" id="catalog">
-  <div class="catalog-inner">
-    <div class="catalog-hdr">
+<!-- КАТАЛОГ -->
+<section class="section" id="catalog">
+  <div class="sec-in">
+    <div class="sec-hdr">
       <h2>Каталог</h2>
       <p>Оберіть категорію — натисніть щоб розгорнути</p>
     </div>
-    <div class="acc-list">
+    <div class="acc" id="accList">
       <div class="acc-block" id="acc-kulky">
-        <button class="acc-head" onclick="toggleAcc('kulky')"><span class="acc-ico">🎈</span><span class="acc-lbl">Кульки</span><span class="acc-num">5</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-kulky"><div class="acc-grid" id="grid-kulky"></div></div>
+        <button class="acc-head" onclick="accToggle('kulky')"><span class="acc-ico">🎈</span><span class="acc-lbl">Кульки</span><span class="acc-num">5</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-kulky"></div></div>
       </div>
       <div class="acc-block" id="acc-solodki">
-        <button class="acc-head" onclick="toggleAcc('solodki')"><span class="acc-ico">🍬</span><span class="acc-lbl">Солодкі букети</span><span class="acc-num">6</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-solodki"><div class="acc-grid" id="grid-solodki"></div></div>
+        <button class="acc-head" onclick="accToggle('solodki')"><span class="acc-ico">🍬</span><span class="acc-lbl">Солодкі букети</span><span class="acc-num">6</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-solodki"></div></div>
       </div>
       <div class="acc-block" id="acc-igrashky">
-        <button class="acc-head" onclick="toggleAcc('igrashky')"><span class="acc-ico">🧸</span><span class="acc-lbl">М'які іграшки</span><span class="acc-num">8</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-igrashky"><div class="acc-grid" id="grid-igrashky"></div></div>
+        <button class="acc-head" onclick="accToggle('igrashky')"><span class="acc-ico">🧸</span><span class="acc-lbl">М'які іграшки</span><span class="acc-num">8</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-igrashky"></div></div>
       </div>
       <div class="acc-block" id="acc-korobky">
-        <button class="acc-head" onclick="toggleAcc('korobky')"><span class="acc-ico">🎁</span><span class="acc-lbl">Коробки та кошики</span><span class="acc-num">10</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-korobky"><div class="acc-grid" id="grid-korobky"></div></div>
+        <button class="acc-head" onclick="accToggle('korobky')"><span class="acc-ico">🎁</span><span class="acc-lbl">Коробки та кошики</span><span class="acc-num">10</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-korobky"></div></div>
       </div>
       <div class="acc-block" id="acc-listivky">
-        <button class="acc-head" onclick="toggleAcc('listivky')"><span class="acc-ico">💌</span><span class="acc-lbl">Листівки</span><span class="acc-num">27</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-listivky"><div class="acc-grid" id="grid-listivky"></div></div>
+        <button class="acc-head" onclick="accToggle('listivky')"><span class="acc-ico">💌</span><span class="acc-lbl">Листівки</span><span class="acc-num">27</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-listivky"></div></div>
       </div>
       <div class="acc-block" id="acc-sumochky">
-        <button class="acc-head" onclick="toggleAcc('sumochky')"><span class="acc-ico">👜</span><span class="acc-lbl">Сумочки квітів</span><span class="acc-num">4</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-sumochky"><div class="acc-grid" id="grid-sumochky"></div></div>
+        <button class="acc-head" onclick="accToggle('sumochky')"><span class="acc-ico">👜</span><span class="acc-lbl">Сумочки квітів</span><span class="acc-num">4</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-sumochky"></div></div>
       </div>
       <div class="acc-block" id="acc-troyandy">
-        <button class="acc-head" onclick="toggleAcc('troyandy')"><span class="acc-ico">🌹</span><span class="acc-lbl">Троянди</span><span class="acc-num">9</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-troyandy"><div class="acc-grid" id="grid-troyandy"></div></div>
+        <button class="acc-head" onclick="accToggle('troyandy')"><span class="acc-ico">🌹</span><span class="acc-lbl">Троянди</span><span class="acc-num">9</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-troyandy"></div></div>
       </div>
       <div class="acc-block" id="acc-khrizantema">
-        <button class="acc-head" onclick="toggleAcc('khrizantema')"><span class="acc-ico">🌸</span><span class="acc-lbl">Хризантема</span><span class="acc-num">8</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-khrizantema"><div class="acc-grid" id="grid-khrizantema"></div></div>
+        <button class="acc-head" onclick="accToggle('khrizantema')"><span class="acc-ico">🌸</span><span class="acc-lbl">Хризантема</span><span class="acc-num">8</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-khrizantema"></div></div>
       </div>
       <div class="acc-block" id="acc-tulpany">
-        <button class="acc-head" onclick="toggleAcc('tulpany')"><span class="acc-ico">🌷</span><span class="acc-lbl">Тюльпани</span><span class="acc-num">5</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-tulpany"><div class="acc-grid" id="grid-tulpany"></div></div>
+        <button class="acc-head" onclick="accToggle('tulpany')"><span class="acc-ico">🌷</span><span class="acc-lbl">Тюльпани</span><span class="acc-num">5</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-tulpany"></div></div>
       </div>
       <div class="acc-block" id="acc-topery">
-        <button class="acc-head" onclick="toggleAcc('topery')"><span class="acc-ico">✨</span><span class="acc-lbl">Топери</span><span class="acc-num">10</span><span class="acc-arr">▾</span></button>
-        <div class="acc-body" id="body-topery"><div class="acc-grid" id="grid-topery"></div></div>
+        <button class="acc-head" onclick="accToggle('topery')"><span class="acc-ico">✨</span><span class="acc-lbl">Топери</span><span class="acc-num">10</span><span class="acc-arr">▾</span></button>
+        <div class="acc-body"><div class="pg" id="pg-topery"></div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACTS -->
-<section class="contacts" id="contacts">
+<section class="section bg-white" id="contacts">
   <div class="contacts-inner">
     <h2>Зв'язатися з нами</h2>
-    <p>Щоб дізнатися актуальну ціну або зробити замовлення,<br>напишіть нам у зручному месенджері:</p>
-    <div class="contact-cards">
-      <button class="contact-card" onclick="openContact('telegram')"><span class="contact-ico">✈️</span> Telegram: +380970938241</button>
-      <button class="contact-card" onclick="openContact('whatsapp')"><span class="contact-ico">💬</span> WhatsApp: +380970938241</button>
-      <button class="contact-card" onclick="openContact('viber')"><span class="contact-ico">📱</span> Viber: +380970938241</button>
-      <button class="contact-card" onclick="openContact('instagram')"><span class="contact-ico">📸</span> Instagram: @kvi_tka24</button>
+    <p>Щоб дізнатися актуальну ціну або зробити замовлення, напишіть нам у зручному месенджері:</p>
+    <div class="cc">
+      <button class="cc-btn" onclick="send('telegram','Вітаю! Хочу дізнатися більше про ваші квіти та подарунки 🌸')"><span class="cc-ico">✈️</span> Telegram: @olhapalanic</button>
+      <button class="cc-btn" onclick="send('whatsapp','Вітаю! Хочу дізнатися більше про ваші квіти та подарунки 🌸')"><span class="cc-ico">💬</span> WhatsApp: +380970938241</button>
+      <button class="cc-btn" onclick="send('viber','Вітаю! Хочу дізнатися більше про ваші квіти та подарунки 🌸')"><span class="cc-ico">📱</span> Viber: +380970938241</button>
+      <button class="cc-btn" onclick="send('instagram','')"><span class="cc-ico">📸</span> Instagram: @kvi_tka24</button>
     </div>
   </div>
 </section>
 
-<footer class="footer">© 2026 Imperial. Усі права захищені.</footer>
+<footer>© 2026 Imperial. Усі права захищені.</footer>
 
 <!-- OVERLAY -->
-<div class="overlay" id="overlay" onclick="closeSb()"></div>
+<div class="overlay" id="overlay" onclick="sbClose()"></div>
 
 <!-- SIDEBAR -->
-<div class="sidebar" id="sidebar">
-  <div class="sb-head">
+<div class="sb" id="sb">
+  <div class="sb-hdr">
     <div class="sb-tabs">
-      <button class="sb-tab active" id="tab-cart" onclick="switchTab('cart')">🛒 Кошик</button>
-      <button class="sb-tab" id="tab-build" onclick="switchTab('build')">🌸 Свій букет</button>
+      <button class="sb-tab on" id="tab-cart" onclick="sbTab('cart')">🛒 Кошик</button>
+      <button class="sb-tab" id="tab-build" onclick="sbTab('build')">🌸 Свій букет</button>
     </div>
-    <button class="sb-close" onclick="closeSb()">✕</button>
+    <button class="sb-x" onclick="sbClose()">✕</button>
   </div>
-  <!-- Cart -->
-  <div class="sb-panel active" id="panel-cart">
+  <!-- CART PANEL -->
+  <div class="sb-panel on" id="panel-cart">
     <div class="sb-scroll" id="cartItems">
       <div class="cart-empty"><span>🌸</span><p>Кошик порожній</p><small>Додайте товари</small></div>
     </div>
-    <div class="sb-footer" id="cartFooter" style="display:none">
+    <div class="sb-foot" id="cartFoot" style="display:none">
       <div class="cart-total">Товарів: <b id="cartTotal">0</b></div>
       <div class="ms-lbl">Відправити через:</div>
       <div class="ms-grid">
-        <button class="ms-btn active" data-m="telegram" onclick="selMs(this,'telegram')">✈️ Telegram</button>
-        <button class="ms-btn" data-m="whatsapp" onclick="selMs(this,'whatsapp')">💬 WhatsApp</button>
-        <button class="ms-btn" data-m="viber" onclick="selMs(this,'viber')">📱 Viber</button>
-        <button class="ms-btn" data-m="instagram" onclick="selMs(this,'instagram')">📸 Instagram</button>
+        <button class="ms-btn on" data-m="telegram" onclick="msSelect(this,'telegram')">✈️ Telegram</button>
+        <button class="ms-btn" data-m="whatsapp" onclick="msSelect(this,'whatsapp')">💬 WhatsApp</button>
+        <button class="ms-btn" data-m="viber" onclick="msSelect(this,'viber')">📱 Viber</button>
+        <button class="ms-btn" data-m="instagram" onclick="msSelect(this,'instagram')">📸 Instagram</button>
       </div>
-      <button class="order-btn" onclick="sendOrder()">Оформити замовлення 🌸</button>
+      <button class="order-btn" onclick="cartSend()">Оформити замовлення 🌸</button>
     </div>
   </div>
-  <!-- Builder -->
+  <!-- BUILD PANEL -->
   <div class="sb-panel" id="panel-build">
     <div class="sb-scroll">
       <div class="bld-lbl">1. Оберіть квітку</div>
       <div class="ft-grid">
-        <button class="ft-btn active" data-type="Троянди" onclick="selFlower(this)"><span class="ft-ico">🌹</span>Троянди</button>
-        <button class="ft-btn" data-type="Хризантеми" onclick="selFlower(this)"><span class="ft-ico">🌸</span>Хризантеми</button>
-        <button class="ft-btn" data-type="Тюльпани" onclick="selFlower(this)"><span class="ft-ico">🌷</span>Тюльпани</button>
+        <button class="ft-btn on" data-type="Троянди" onclick="ftSelect(this)"><span class="fi">🌹</span>Троянди</button>
+        <button class="ft-btn" data-type="Хризантеми" onclick="ftSelect(this)"><span class="fi">🌸</span>Хризантеми</button>
+        <button class="ft-btn" data-type="Тюльпани" onclick="ftSelect(this)"><span class="fi">🌷</span>Тюльпани</button>
       </div>
       <div class="bld-lbl">2. Колір</div>
-      <div class="color-grid" id="colorGrid"></div>
+      <div class="cg" id="colorGrid"></div>
       <div class="qty-row">
         <div class="bld-lbl" style="margin-bottom:0">3. Кількість</div>
-        <div class="qty-controls">
-          <button class="qty-btn" onclick="chQty(-1)">−</button>
-          <span class="qty-num" id="bldQty">1</span>
-          <button class="qty-btn" onclick="chQty(1)">+</button>
+        <div class="qty-ctrl">
+          <button class="qty-b" onclick="qtyChange(-1)">−</button>
+          <span class="qty-n" id="bldQty">1</span>
+          <button class="qty-b" onclick="qtyChange(1)">+</button>
         </div>
       </div>
-      <button class="add-btn" onclick="addToBld()">+ Додати до букету</button>
+      <button class="add-btn" onclick="bldAdd()">+ Додати до букету</button>
       <div class="bld-list" id="bldList"></div>
       <textarea class="bld-note" id="bldNote" rows="3" placeholder="Побажання: зелень, стрічка, пакування..."></textarea>
     </div>
-    <div class="sb-footer">
+    <div class="sb-foot">
       <div class="ms-grid">
-        <button class="ms-btn active" data-bm="telegram" onclick="selBldMs(this,'telegram')">✈️ Telegram</button>
-        <button class="ms-btn" data-bm="whatsapp" onclick="selBldMs(this,'whatsapp')">💬 WhatsApp</button>
-        <button class="ms-btn" data-bm="viber" onclick="selBldMs(this,'viber')">📱 Viber</button>
-        <button class="ms-btn" data-bm="instagram" onclick="selBldMs(this,'instagram')">📸 Instagram</button>
+        <button class="ms-btn on" data-bm="telegram" onclick="bldMsSelect(this,'telegram')">✈️ Telegram</button>
+        <button class="ms-btn" data-bm="whatsapp" onclick="bldMsSelect(this,'whatsapp')">💬 WhatsApp</button>
+        <button class="ms-btn" data-bm="viber" onclick="bldMsSelect(this,'viber')">📱 Viber</button>
+        <button class="ms-btn" data-bm="instagram" onclick="bldMsSelect(this,'instagram')">📸 Instagram</button>
       </div>
-      <button class="order-btn" onclick="sendBld()">Надіслати замовлення 🌸</button>
+      <button class="order-btn" onclick="bldSend()">Надіслати замовлення 🌸</button>
     </div>
   </div>
 </div>
 
 <!-- MODAL -->
-<div class="modal-wrap" id="modal" onclick="if(event.target===this)closeModal()">
+<div class="modal-bg" id="modal" onclick="if(event.target===this)modalClose()">
   <div class="modal">
     <h3 id="modalTitle">Замовити</h3>
-    <p class="modal-sub" id="modalSub">Оберіть зручний месенджер:</p>
+    <p class="modal-sub">Оберіть зручний месенджер:</p>
     <div class="modal-btns">
-      <button class="modal-btn" onclick="sendModal('telegram')"><span>✈️</span> Telegram</button>
-      <button class="modal-btn" onclick="sendModal('whatsapp')"><span>💬</span> WhatsApp</button>
-      <button class="modal-btn" onclick="sendModal('viber')"><span>📱</span> Viber</button>
-      <button class="modal-btn" onclick="sendModal('instagram')"><span>📸</span> Instagram</button>
+      <button class="modal-btn" onclick="modalSend('telegram')"><span class="mi">✈️</span> Telegram</button>
+      <button class="modal-btn" onclick="modalSend('whatsapp')"><span class="mi">💬</span> WhatsApp</button>
+      <button class="modal-btn" onclick="modalSend('viber')"><span class="mi">📱</span> Viber</button>
+      <button class="modal-btn" onclick="modalSend('instagram')"><span class="mi">📸</span> Instagram</button>
     </div>
-    <button class="modal-cancel" onclick="closeModal()">Скасувати</button>
+    <button class="modal-cancel" onclick="modalClose()">Скасувати</button>
   </div>
 </div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <script>
-// === CATALOG ===
-const CATS = [
-  {id:'kulky',       lbl:'Кульки',            dir:'Кульки',                    p:'4', n:5 },
-  {id:'solodki',     lbl:'Солодкі букети',    dir:'Солодкі букети',            p:'5', n:6 },
-  {id:'igrashky',    lbl:"М'які іграшки",     dir:'Мякі іграшки',              p:'6', n:8 },
-  {id:'korobky',     lbl:'Коробки та кошики', dir:'Коробки сумочки та корзини',p:'8', n:10},
-  {id:'listivky',    lbl:'Листівки',          dir:'Листівки',                  p:'9', n:27},
-  {id:'sumochky',    lbl:'Сумочки квітів',    dir:'Сумочки квітів',            p:'10',n:4 },
-  {id:'troyandy',    lbl:'Троянди',           dir:'троянди',                   p:'1', n:9 },
-  {id:'khrizantema', lbl:'Хризантема',        dir:'Хризантема',                p:'2', n:8 },
-  {id:'tulpany',     lbl:'Тюльпани',          dir:'Тюльпани',                  p:'3', n:5 },
-  {id:'topery',      lbl:'Топери',            dir:'Топери',                    p:'7', n:10},
+// ═══════════════════════════════
+// CATALOG DATA
+// ═══════════════════════════════
+var CATS = [
+  {id:'kulky',       lbl:'Кульки',            dir:'Кульки',                     p:'4',  n:5 },
+  {id:'solodki',     lbl:'Солодкі букети',    dir:'Солодкі букети',             p:'5',  n:6 },
+  {id:'igrashky',    lbl:"М'які іграшки",     dir:'Мякі іграшки',               p:'6',  n:8 },
+  {id:'korobky',     lbl:'Коробки та кошики', dir:'Коробки сумочки та корзини', p:'8',  n:10},
+  {id:'listivky',    lbl:'Листівки',          dir:'Листівки',                   p:'9',  n:27},
+  {id:'sumochky',    lbl:'Сумочки квітів',    dir:'Сумочки квітів',             p:'10', n:4 },
+  {id:'troyandy',    lbl:'Троянди',           dir:'троянди',                    p:'1',  n:9 },
+  {id:'khrizantema', lbl:'Хризантема',        dir:'Хризантема',                 p:'2',  n:8 },
+  {id:'tulpany',     lbl:'Тюльпани',          dir:'Тюльпани',                   p:'3',  n:5 },
+  {id:'topery',      lbl:'Топери',            dir:'Топери',                     p:'7',  n:10}
 ];
 
-// Build grids
-document.addEventListener('DOMContentLoaded', () => {
-  CATS.forEach(c => {
-    const g = document.getElementById('grid-' + c.id);
-    if (!g) return;
-    g.innerHTML = Array.from({length:c.n},(_,i)=>{
-      const name = c.lbl + ' #' + (i+1);
-      const src  = 'images/images1/' + c.dir + '/' + c.p + '.' + (i+1) + '.jpg';
-      const ns   = name.replace(/'/g,"\\'");
-      return `<div class="pc"><div class="pc-img"><img src="${src}" alt="${name}" loading="lazy" onerror="this.parentElement.style.background='#f5ede6'"></div><div class="pc-body"><div class="pc-name">${name}</div><div class="pc-btns"><button class="pc-cart" onclick="addCart('${ns}')">В кошик</button><button class="pc-order" onclick="openModal('${ns}')">Замовити</button></div></div></div>`;
-    }).join('');
-  });
-  renderColors('Троянди');
-});
-
-// === ACCORDION ===
-function toggleAcc(id) {
-  const blk = document.getElementById('acc-'+id);
-  const bdy = document.getElementById('body-'+id);
-  if (!blk || !bdy) return;
-  const was = blk.classList.contains('open');
-  document.querySelectorAll('.acc-block').forEach(b=>b.classList.remove('open'));
-  document.querySelectorAll('.acc-body').forEach(b=>b.classList.remove('open'));
-  if (!was) { blk.classList.add('open'); bdy.classList.add('open'); }
+// Build product card HTML
+function makeCard(name, src) {
+  return '<div class="pc">'
+    + '<div class="pc-img"><img src="' + src + '" alt="' + name + '" loading="lazy" onerror="this.parentElement.style.background=\'#f5ede6\'"></div>'
+    + '<div class="pc-body">'
+    + '<div class="pc-name">' + name + '</div>'
+    + '<div class="pc-btns">'
+    + '<button class="pc-cart" onclick="cartAdd(\'' + name.replace(/'/g, "\\'") + '\')">В кошик</button>'
+    + '<button class="pc-order" onclick="modalOpen(\'' + name.replace(/'/g, "\\'") + '\')">Замовити</button>'
+    + '</div></div></div>';
 }
 
-function goAcc(id) {
-  closeDd();
-  setTimeout(()=>{
-    document.querySelectorAll('.acc-block').forEach(b=>b.classList.remove('open'));
-    document.querySelectorAll('.acc-body').forEach(b=>b.classList.remove('open'));
-    const blk = document.getElementById('acc-'+id);
-    const bdy = document.getElementById('body-'+id);
-    if (blk && bdy) { blk.classList.add('open'); bdy.classList.add('open'); }
-    setTimeout(()=>blk&&blk.scrollIntoView({behavior:'smooth',block:'start'}),50);
-  },80);
-}
-
-function allAcc() {
-  closeDd();
-  setTimeout(()=>{
-    document.querySelectorAll('.acc-block').forEach(b=>b.classList.add('open'));
-    document.querySelectorAll('.acc-body').forEach(b=>b.classList.add('open'));
-    setTimeout(()=>document.getElementById('catalog').scrollIntoView({behavior:'smooth'}),50);
-  },80);
-}
-
-// === DROPDOWN ===
-function toggleDd(e) {
-  e.stopPropagation();
-  const dd = document.getElementById('dropdown');
-  const btn = document.getElementById('catBtn');
-  const open = dd.classList.contains('open');
-  if (!open) {
-    const r = btn.getBoundingClientRect();
-    dd.style.left = r.left + 'px';
-    dd.style.top = (r.bottom + 6) + 'px';
+// Build all grids on page load
+window.addEventListener('DOMContentLoaded', function() {
+  // Bouquets: images/images1/1.jpg ... 9.jpg
+  var bq = document.getElementById('pgBouquets');
+  if (bq) {
+    var h = '';
+    for (var i = 1; i <= 9; i++) {
+      h += makeCard('Букет #' + i, 'images/images1/' + i + '.jpg');
+    }
+    bq.innerHTML = h;
   }
-  dd.classList.toggle('open', !open);
-  btn.classList.toggle('open', !open);
-}
-function closeDd() {
-  document.getElementById('dropdown').classList.remove('open');
-  document.getElementById('catBtn').classList.remove('open');
-}
-document.addEventListener('click', e => {
-  if (!document.getElementById('catBtn').contains(e.target)) closeDd();
+
+  // Catalog categories
+  CATS.forEach(function(c) {
+    var g = document.getElementById('pg-' + c.id);
+    if (!g) return;
+    var h = '';
+    for (var i = 1; i <= c.n; i++) {
+      h += makeCard(c.lbl + ' #' + i, 'images/images1/' + c.dir + '/' + c.p + '.' + i + '.jpg');
+    }
+    g.innerHTML = h;
+  });
+
+  // Init builder colors
+  buildColors('Троянди');
 });
 
-// === SIDEBAR ===
-function openSb(panel) {
-  document.getElementById('sidebar').classList.add('open');
-  document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  switchTab(panel || 'cart');
+// ═══════════════════════════════
+// SCROLL HELPER
+// ═══════════════════════════════
+function scrollTo(id) {
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior: 'smooth'});
 }
-function closeSb() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('open');
+
+// ═══════════════════════════════
+// DROPDOWN
+// ═══════════════════════════════
+function ddToggle(e) {
+  e.stopPropagation();
+  var btn = document.getElementById('ddBtn');
+  var menu = document.getElementById('ddMenu');
+  var open = menu.classList.contains('is-open');
+  menu.classList.toggle('is-open', !open);
+  btn.classList.toggle('is-open', !open);
+  if (!open) {
+    var r = btn.getBoundingClientRect();
+    menu.style.left = r.left + 'px';
+    menu.style.top = (r.bottom + 6) + 'px';
+  }
+}
+
+function ddClose() {
+  document.getElementById('ddMenu').classList.remove('is-open');
+  document.getElementById('ddBtn').classList.remove('is-open');
+}
+
+document.addEventListener('click', function(e) {
+  if (!document.getElementById('ddBtn').contains(e.target)) ddClose();
+});
+
+function ddGo(id) {
+  ddClose();
+  if (id === 'bouquets' || id === 'catalog') {
+    setTimeout(function() { scrollTo(id); }, 80);
+  } else {
+    // Open accordion and scroll to it
+    setTimeout(function() {
+      // Close all first
+      document.querySelectorAll('.acc-block').forEach(function(b) { b.classList.remove('open'); });
+      // Open target
+      var block = document.getElementById('acc-' + id);
+      if (block) {
+        block.classList.add('open');
+        setTimeout(function() { block.scrollIntoView({behavior:'smooth', block:'start'}); }, 50);
+      }
+    }, 80);
+  }
+}
+
+// ═══════════════════════════════
+// ACCORDION
+// ═══════════════════════════════
+function accToggle(id) {
+  var block = document.getElementById('acc-' + id);
+  if (!block) return;
+  var wasOpen = block.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.acc-block').forEach(function(b) { b.classList.remove('open'); });
+  // Toggle this one
+  if (!wasOpen) block.classList.add('open');
+}
+
+// ═══════════════════════════════
+// SIDEBAR
+// ═══════════════════════════════
+function sbOpen(panel) {
+  document.getElementById('sb').classList.add('on');
+  document.getElementById('overlay').classList.add('on');
+  document.body.style.overflow = 'hidden';
+  sbTab(panel || 'cart');
+}
+
+function sbClose() {
+  document.getElementById('sb').classList.remove('on');
+  document.getElementById('overlay').classList.remove('on');
   document.body.style.overflow = '';
 }
-function switchTab(id) {
-  document.querySelectorAll('.sb-tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.sb-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  document.getElementById('panel-'+id).classList.add('active');
+
+function sbTab(id) {
+  document.querySelectorAll('.sb-tab').forEach(function(t) { t.classList.remove('on'); });
+  document.querySelectorAll('.sb-panel').forEach(function(p) { p.classList.remove('on'); });
+  document.getElementById('tab-' + id).classList.add('on');
+  document.getElementById('panel-' + id).classList.add('on');
 }
 
-// === CART ===
-let cart=[], cartMs='telegram';
+// ═══════════════════════════════
+// CART
+// ═══════════════════════════════
+var cart = [];
+var cartMs = 'telegram';
 
-function addCart(name) {
-  const item = cart.find(i=>i.name===name);
-  if (item) item.qty++; else cart.push({name,qty:1});
-  renderCart();
-  openSb('cart');
+function cartAdd(name) {
+  var item = cart.find(function(i) { return i.name === name; });
+  if (item) { item.qty++; } else { cart.push({name: name, qty: 1}); }
+  cartRender();
+  sbOpen('cart');
 }
-function remCart(name) {
-  cart = cart.filter(i=>i.name!==name);
-  renderCart();
+
+function cartRemove(name) {
+  cart = cart.filter(function(i) { return i.name !== name; });
+  cartRender();
 }
-function chCart(name, d) {
-  const item = cart.find(i=>i.name===name);
-  if (item) { item.qty = Math.max(1, item.qty+d); renderCart(); }
+
+function cartQty(name, d) {
+  var item = cart.find(function(i) { return i.name === name; });
+  if (item) { item.qty = Math.max(1, item.qty + d); cartRender(); }
 }
-function renderCart() {
-  const total = cart.reduce((s,i)=>s+i.qty,0);
-  document.getElementById('cartCount').textContent = total;
-  const el = document.getElementById('cartItems');
-  const ft = document.getElementById('cartFooter');
+
+function cartRender() {
+  var total = cart.reduce(function(s, i) { return s + i.qty; }, 0);
+  document.getElementById('cartN').textContent = total;
+  var el = document.getElementById('cartItems');
+  var ft = document.getElementById('cartFoot');
   if (!cart.length) {
     el.innerHTML = '<div class="cart-empty"><span>🌸</span><p>Кошик порожній</p><small>Додайте товари</small></div>';
     ft.style.display = 'none';
   } else {
-    el.innerHTML = cart.map(i=>{
-      const n=i.name.replace(/'/g,"\\'");
-      return `<div class="cart-item"><div class="ci-name">${i.name}</div><div class="ci-controls"><button class="ci-qbtn" onclick="chCart('${n}',-1)">−</button><span class="ci-qty">${i.qty}</span><button class="ci-qbtn" onclick="chCart('${n}',1)">+</button><button class="ci-rm" onclick="remCart('${n}')">×</button></div></div>`;
-    }).join('');
+    var h = '';
+    cart.forEach(function(item) {
+      var n = item.name.replace(/'/g, "\\'");
+      h += '<div class="ci">'
+        + '<div class="ci-name">' + item.name + '</div>'
+        + '<div class="ci-ctrl">'
+        + '<button class="ci-q" onclick="cartQty(\'' + n + '\',-1)">−</button>'
+        + '<span class="ci-num">' + item.qty + '</span>'
+        + '<button class="ci-q" onclick="cartQty(\'' + n + '\',1)">+</button>'
+        + '<button class="ci-rm" onclick="cartRemove(\'' + n + '\')">×</button>'
+        + '</div></div>';
+    });
+    el.innerHTML = h;
     document.getElementById('cartTotal').textContent = total;
     ft.style.display = 'block';
   }
 }
-function selMs(btn, m) {
+
+function msSelect(btn, m) {
   cartMs = m;
-  document.querySelectorAll('[data-m]').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-function sendOrder() {
-  if (!cart.length) return;
-  const lines = cart.map(i=>`• ${i.name}${i.qty>1?' — '+i.qty+' шт.':''}`).join('\n');
-  sendMsg(cartMs, `Вітаю! 🌸 Хочу замовити:\n\n${lines}\n\nПідкажіть ціну та деталі?`);
-  closeSb();
+  document.querySelectorAll('[data-m]').forEach(function(b) { b.classList.remove('on'); });
+  btn.classList.add('on');
 }
 
-// === MODAL ===
-let modalName = '';
-function openModal(name) {
+function cartSend() {
+  if (!cart.length) return;
+  var lines = cart.map(function(i) {
+    return '• ' + i.name + (i.qty > 1 ? ' — ' + i.qty + ' шт.' : '');
+  }).join('\n');
+  send(cartMs, 'Вітаю! 🌸 Хочу замовити:\n\n' + lines + '\n\nПідкажіть, будь ласка, ціну та деталі?');
+  sbClose();
+}
+
+// ═══════════════════════════════
+// MODAL
+// ═══════════════════════════════
+var modalName = '';
+
+function modalOpen(name) {
   modalName = name;
   document.getElementById('modalTitle').textContent = name;
-  document.getElementById('modal').classList.add('open');
+  document.getElementById('modal').classList.add('on');
 }
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
+
+function modalClose() {
+  document.getElementById('modal').classList.remove('on');
   modalName = '';
 }
-function sendModal(platform) {
-  sendMsg(platform, `Вітаю! 🌸 Хочу замовити: ${modalName}\n\nПідкажіть, будь ласка, актуальну ціну?`);
-  closeModal();
+
+function modalSend(platform) {
+  send(platform, 'Вітаю! 🌸 Хочу замовити: ' + modalName + '\n\nПідкажіть, будь ласка, актуальну ціну?');
+  modalClose();
 }
 
-// === CONTACTS ===
-function openContact(p) {
-  sendMsg(p, 'Вітаю! Хочу дізнатися більше про квіти та подарунки 🌸');
-}
+// ═══════════════════════════════
+// MESSENGER SEND
+// ═══════════════════════════════
+function send(platform, msg) {
+  var enc = encodeURIComponent(msg);
 
-// === MESSENGER ===
-function copyToClipboard(text) {
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    return navigator.clipboard.writeText(text);
+  if (platform === 'telegram') {
+    window.open('https://t.me/olhapalanic?text=' + enc, '_blank');
+
+  } else if (platform === 'whatsapp') {
+    window.open('https://wa.me/380970938241?text=' + enc, '_blank');
+
+  } else if (platform === 'viber') {
+    // Copy message, show toast, then open Viber
+    copyText(msg);
+    showToast('📋 <b>Повідомлення скопійовано!</b><br><small>Відкриваємо Viber — вставте текст у поле чату (утримайте → Вставити)</small>');
+    setTimeout(function() {
+      window.open('viber://chat?number=%2B380970938241', '_blank');
+    }, 1800);
+
+  } else if (platform === 'instagram') {
+    // Copy message, show toast, then open Instagram
+    if (msg) copyText(msg);
+    showToast('📋 <b>Повідомлення скопійовано!</b><br><small>Відкриваємо Instagram — вставте текст у Direct (утримайте → Вставити)</small>');
+    setTimeout(function() {
+      window.open('https://instagram.com/kvi_tka24', '_blank');
+    }, 1800);
   }
-  return new Promise((res) => {
-    const ta = document.createElement('textarea');
-    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
-    document.body.appendChild(ta); ta.focus(); ta.select();
-    try { document.execCommand('copy'); } catch(e){}
-    document.body.removeChild(ta); res();
+}
+
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).catch(function() { fallbackCopy(text); });
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
+function showToast(html) {
+  var t = document.getElementById('toast');
+  t.innerHTML = html;
+  t.classList.add('on');
+  setTimeout(function() { t.classList.remove('on'); }, 4500);
+}
+
+// ═══════════════════════════════
+// BOUQUET BUILDER
+// ═══════════════════════════════
+var COLORS = {
+  'Троянди':    [{n:'Червоні',c:'#c0392b'},{n:'Рожеві',c:'#e91e8c'},{n:'Білі',c:'#f5f0eb'},{n:'Кремові',c:'#f0d9b5'},{n:'Жовті',c:'#f1c40f'},{n:'Бордові',c:'#7b1e3a'},{n:'Персикові',c:'#ffb347'}],
+  'Хризантеми':[{n:'Білі',c:'#f5f0eb'},{n:'Жовті',c:'#f1c40f'},{n:'Рожеві',c:'#e91e8c'},{n:'Фіолетові',c:'#8e44ad'},{n:'Кремові',c:'#f0d9b5'}],
+  'Тюльпани':  [{n:'Червоні',c:'#c0392b'},{n:'Рожеві',c:'#e91e8c'},{n:'Білі',c:'#f5f0eb'},{n:'Жовті',c:'#f1c40f'},{n:'Фіолетові',c:'#8e44ad'},{n:'Помаранчеві',c:'#e67e22'}]
+};
+var curFlower = 'Троянди';
+var curColor = null;
+var bldQty = 1;
+var bouquet = [];
+var bldMs = 'telegram';
+
+function buildColors(type) {
+  var g = document.getElementById('colorGrid');
+  if (!g) return;
+  var h = '';
+  (COLORS[type] || []).forEach(function(clr) {
+    h += '<button class="cc2' + (curColor === clr.n ? ' on' : '') + '" onclick="colorPick(\'' + clr.n + '\')" data-c="' + clr.n + '">'
+      + '<span class="cd" style="background:' + clr.c + '"></span>' + clr.n + '</button>';
+  });
+  g.innerHTML = h;
+}
+
+function ftSelect(btn) {
+  document.querySelectorAll('.ft-btn').forEach(function(b) { b.classList.remove('on'); });
+  btn.classList.add('on');
+  curFlower = btn.dataset.type;
+  curColor = null;
+  buildColors(curFlower);
+}
+
+function colorPick(name) {
+  curColor = name;
+  document.querySelectorAll('.cc2').forEach(function(c) {
+    c.classList.toggle('on', c.dataset.c === name);
   });
 }
 
-function showCopyToast(p) {
-  let t = document.getElementById('copyToast');
-  if (!t) {
-    t = document.createElement('div'); t.id='copyToast';
-    t.style.cssText='position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:#2c2420;color:white;padding:16px 24px;border-radius:16px;font-family:Montserrat,sans-serif;font-size:13px;font-weight:500;z-index:9999;box-shadow:0 10px 40px rgba(0,0,0,.3);text-align:center;line-height:1.6;max-width:330px;opacity:0;transition:all .3s ease;pointer-events:none;';
-    document.body.appendChild(t);
-  }
-  const nm = p==='viber'?'Viber':'Instagram';
-  t.innerHTML = '📋 <b>Повідомлення скопійовано!</b><br><small style="opacity:.75">Відкриваємо ' + nm + ' — вставте текст у поле чату (утримайте → Вставити)</small>';
-  t.style.opacity='1'; t.style.transform='translateX(-50%) translateY(0)';
-  setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(20px)'; }, 4500);
+function qtyChange(d) {
+  bldQty = Math.max(1, Math.min(999, bldQty + d));
+  document.getElementById('bldQty').textContent = bldQty;
 }
 
-function sendMsg(p, msg) {
-  const phone = '380970938241';
-  const enc = encodeURIComponent(msg);
-  if (p === 'viber') {
-    copyToClipboard(msg).then(()=>{
-      showCopyToast('viber');
-      setTimeout(()=> window.open('viber://chat?number=%2B' + phone, '_blank'), 1800);
-    });
-  } else if (p === 'instagram') {
-    copyToClipboard(msg).then(()=>{
-      showCopyToast('instagram');
-      setTimeout(()=> window.open('https://instagram.com/kvi_tka24', '_blank'), 1800);
-    });
-  } else if (p === 'telegram') {
-    // Use phone number link — opens chat with pre-filled text
-    window.open('https://t.me/olhapalanic?text=' + enc, '_blank');
-  } else if (p === 'whatsapp') {
-    window.open('https://wa.me/380970938241?text=' + enc, '_blank');
-  }
+function bldAdd() {
+  if (!curColor) { alert('Оберіть колір'); return; }
+  bouquet.push({type: curFlower, color: curColor, qty: bldQty});
+  curColor = null;
+  bldQty = 1;
+  document.getElementById('bldQty').textContent = '1';
+  buildColors(curFlower);
+  bldRender();
 }
 
-// === BUILDER ===
-const COLORS = {
-  'Троянди':    [{n:'Червоні',c:'#c0392b'},{n:'Рожеві',c:'#e91e8c'},{n:'Білі',c:'#f5f0eb'},{n:'Кремові',c:'#f0d9b5'},{n:'Жовті',c:'#f1c40f'},{n:'Бордові',c:'#7b1e3a'},{n:'Персикові',c:'#ffb347'}],
-  'Хризантеми':[{n:'Білі',c:'#f5f0eb'},{n:'Жовті',c:'#f1c40f'},{n:'Рожеві',c:'#e91e8c'},{n:'Фіолетові',c:'#8e44ad'},{n:'Кремові',c:'#f0d9b5'}],
-  'Тюльпани':  [{n:'Червоні',c:'#c0392b'},{n:'Рожеві',c:'#e91e8c'},{n:'Білі',c:'#f5f0eb'},{n:'Жовті',c:'#f1c40f'},{n:'Фіолетові',c:'#8e44ad'},{n:'Помаранчеві',c:'#e67e22'}],
-};
-let curF='Троянди', curC=null, bldQty=1, bouquet=[], bldMs='telegram';
+function bldRemove(i) {
+  bouquet.splice(i, 1);
+  bldRender();
+}
 
-function renderColors(type) {
-  const g = document.getElementById('colorGrid');
-  if (!g) return;
-  g.innerHTML = (COLORS[type]||[]).map(({n,c})=>`<button class="color-chip${curC===n?' active':''}" onclick="selColor('${n}')" data-c="${n}"><span class="color-dot" style="background:${c}"></span>${n}</button>`).join('');
+function bldRender() {
+  var h = '';
+  bouquet.forEach(function(f, i) {
+    h += '<div class="bld-item">'
+      + '<div class="bi-info"><div class="bi-t">' + f.type + '</div><div class="bi-d">' + f.color + ' · ' + f.qty + ' шт.</div></div>'
+      + '<button class="ci-rm" onclick="bldRemove(' + i + ')">×</button>'
+      + '</div>';
+  });
+  document.getElementById('bldList').innerHTML = h;
 }
-function selFlower(btn) {
-  document.querySelectorAll('.ft-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active'); curF=btn.dataset.type; curC=null; renderColors(curF);
+
+function bldMsSelect(btn, m) {
+  bldMs = m;
+  document.querySelectorAll('[data-bm]').forEach(function(b) { b.classList.remove('on'); });
+  btn.classList.add('on');
 }
-function selColor(n) {
-  curC=n;
-  document.querySelectorAll('.color-chip').forEach(c=>c.classList.toggle('active',c.dataset.c===n));
-}
-function chQty(d) { bldQty=Math.max(1,Math.min(999,bldQty+d)); document.getElementById('bldQty').textContent=bldQty; }
-function addToBld() {
-  if (!curC) { alert('Оберіть колір'); return; }
-  bouquet.push({type:curF,color:curC,qty:bldQty});
-  curC=null; bldQty=1; document.getElementById('bldQty').textContent='1'; renderColors(curF);
-  renderBld();
-}
-function remBld(i) { bouquet.splice(i,1); renderBld(); }
-function renderBld() {
-  document.getElementById('bldList').innerHTML = bouquet.map((f,i)=>`<div class="bld-item"><div class="bld-info"><div class="bld-title">${f.type}</div><div class="bld-detail">${f.color} · ${f.qty} шт.</div></div><button class="ci-rm" onclick="remBld(${i})">×</button></div>`).join('');
-}
-function selBldMs(btn, m) {
-  bldMs=m;
-  document.querySelectorAll('[data-bm]').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-function sendBld() {
+
+function bldSend() {
   if (!bouquet.length) { alert('Додайте квіти до букету'); return; }
-  const note = document.getElementById('bldNote').value.trim();
-  const lines = bouquet.map(f=>`• ${f.type} (${f.color}) — ${f.qty} шт.`).join('\n');
-  let msg = `Вітаю! 🌸 Хочу замовити букет:\n\n${lines}`;
-  if (note) msg+=`\n\n📝 Побажання: ${note}`;
-  msg+=`\n\nПідкажіть ціну та деталі?`;
-  sendMsg(bldMs, msg);
-  closeSb();
+  var note = document.getElementById('bldNote').value.trim();
+  var lines = bouquet.map(function(f) {
+    return '• ' + f.type + ' (' + f.color + ') — ' + f.qty + ' шт.';
+  }).join('\n');
+  var msg = 'Вітаю! 🌸 Хочу замовити букет:\n\n' + lines;
+  if (note) msg += '\n\n📝 Побажання: ' + note;
+  msg += '\n\nПідкажіть ціну та деталі?';
+  send(bldMs, msg);
+  sbClose();
 }
-
-// Build bouquet grid
-(function() {
-  const g = document.getElementById('bqGrid');
-  if (!g) return;
-  let html = '';
-  for (let i = 1; i <= 9; i++) {
-    const name = 'Букет #' + i;
-    const src  = 'images/images1/' + i + '.jpg';
-    const ns   = name.replace(/'/g, "\'");
-    html += '<div class="pc"><div class="pc-img"><img src="' + src + '" alt="' + name + '" loading="lazy" onerror="this.parentElement.style.background='#f5ede6'"></div><div class="pc-body"><div class="pc-name">' + name + '</div><div class="pc-btns"><button class="pc-cart" onclick="addCart('' + ns + '')">В кошик</button><button class="pc-order" onclick="openModal('' + ns + '')">Замовити</button></div></div></div>';
-  }
-  g.innerHTML = html;
-})();
-
 </script>
 </body>
 </html>
