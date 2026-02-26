@@ -1814,3 +1814,109 @@ footer {
     .cat-main-head h2 { font-size: 22px; }
     .pc-name { font-size: 12px; min-height: 30px; }
 }
+
+/* ═══════════════════════════════════════════
+   NAV CATALOG DROPDOWN
+   ═══════════════════════════════════════════ */
+
+.nav-cat-wrap {
+    position: relative;
+}
+
+.nav-cat-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 30px;
+    transition: all 0.25s ease;
+}
+.nav-cat-trigger:hover,
+.nav-cat-trigger.open {
+    color: var(--text-main);
+    background: var(--accent-light);
+}
+.nav-arrow {
+    font-size: 10px;
+    transition: transform 0.25s ease;
+    opacity: 0.6;
+}
+.nav-arrow.open { transform: rotate(180deg); }
+
+/* Dropdown panel */
+.nav-cat-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 230px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(58,51,48,0.14);
+    padding: 10px 8px;
+    z-index: 5000;
+    animation: fadeInDown 0.2s ease;
+}
+.nav-cat-menu.open { display: block; }
+
+@keyframes fadeInDown {
+    from { opacity:0; transform:translateY(-8px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+
+.ncm-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    background: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+.ncm-item:hover {
+    background: var(--accent-light);
+    padding-left: 18px;
+}
+.ncm-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 6px 8px;
+}
+.ncm-all {
+    font-weight: 700;
+    color: var(--accent-hover);
+}
+
+/* Catalog without sidebar — full width */
+.cat-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+.cat-main { width: 100%; }
+
+/* Product grid wider now */
+.pc-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+}
+
+@media (max-width: 600px) {
+    .nav-cat-menu { width: 200px; }
+    .ncm-item { font-size: 12px; }
+}

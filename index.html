@@ -32,9 +32,28 @@
         <div class="container header-content">
             <div class="logo">IMPERIAL</div>
             <nav class="nav-links">
-                <a href="#catalog"><span class="icon">💐</span> Каталог</a>
-                <a href="#contacts"><span class="icon">📞</span> Контакти</a>
-                <button class="build-nav-btn" onclick="openBuildTab()">🌸</button>
+                <!-- Каталог з випадаючим меню -->
+                <div class="nav-cat-wrap">
+                    <button class="nav-cat-trigger" onclick="toggleCatMenu()">
+                        Каталог <span class="nav-arrow" id="catArrow">▾</span>
+                    </button>
+                    <div class="nav-cat-menu" id="navCatMenu">
+                        <button class="ncm-item" onclick="openCat('kulky')">🎈 Кульки</button>
+                        <button class="ncm-item" onclick="openCat('solodki')">🍬 Солодкі букети</button>
+                        <button class="ncm-item" onclick="openCat('igrashky')">🧸 М'які іграшки</button>
+                        <button class="ncm-item" onclick="openCat('korobky')">🎁 Коробки та кошики</button>
+                        <button class="ncm-item" onclick="openCat('listivky')">💌 Листівки</button>
+                        <button class="ncm-item" onclick="openCat('sumochky')">👜 Сумочки квітів</button>
+                        <button class="ncm-item" onclick="openCat('troyandy')">🌹 Троянди</button>
+                        <button class="ncm-item" onclick="openCat('khrizantema')">🌸 Хризантема</button>
+                        <button class="ncm-item" onclick="openCat('tulpany')">🌷 Тюльпани</button>
+                        <button class="ncm-item" onclick="openCat('topery')">✨ Топери</button>
+                        <div class="ncm-divider"></div>
+                        <button class="ncm-item ncm-all" onclick="openCat('all')">💐 Всі категорії</button>
+                    </div>
+                </div>
+                <a href="#contacts">Контакти</a>
+                <button class="build-nav-btn" onclick="openBuildTab()" title="Скласти свій букет">🌸</button>
                 <button class="cart-btn" onclick="toggleCart()">
                     <span class="cart-icon">🛒</span>
                     <span class="cart-count" id="cartCount">0</span>
@@ -64,25 +83,6 @@
     <!-- Каталог -->
     <section id="catalog" class="cat-section">
         <div class="cat-wrap">
-
-            <!-- Ліва панель -->
-            <aside class="cat-side">
-                <div class="cat-side-head">Категорії</div>
-                <button class="csi active" data-catid="all" onclick="showCat(this,'all')">Всі категорії</button>
-                <button class="csi" data-catid="troyandy" onclick="showCat(this,'troyandy')">Троянди</button>
-                <button class="csi" data-catid="khrizantema" onclick="showCat(this,'khrizantema')">Хризантема</button>
-                <button class="csi" data-catid="tulpany" onclick="showCat(this,'tulpany')">Тюльпани</button>
-                <button class="csi" data-catid="kulky" onclick="showCat(this,'kulky')">Кульки</button>
-                <button class="csi" data-catid="solodki" onclick="showCat(this,'solodki')">Солодкі букети</button>
-                <button class="csi" data-catid="igrashky" onclick="showCat(this,'igrashky')">М'які іграшки</button>
-                <button class="csi" data-catid="topery" onclick="showCat(this,'topery')">Топери</button>
-                <button class="csi" data-catid="korobky" onclick="showCat(this,'korobky')">Коробки та кошики</button>
-                <button class="csi" data-catid="listivky" onclick="showCat(this,'listivky')">Листівки</button>
-                <button class="csi" data-catid="sumochky" onclick="showCat(this,'sumochky')">Сумочки квітів</button>
-                
-                <div class="cat-side-sep"></div>
-                <button class="csi csi-build" onclick="openBuildTab()">🌸 Скласти букет</button>
-            </aside>
 
             <!-- Права область -->
             <div class="cat-main">
