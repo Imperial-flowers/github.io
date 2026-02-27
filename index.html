@@ -451,7 +451,7 @@ footer { background:var(--dark); color:rgba(255,255,255,.5); text-align:center; 
     <p>Текст замовлення вже в буфері обміну.<br>
     Натисніть кнопку нижче — відкриється <b id="appWarnApp">застосунок</b>.<br>
     Там утримайте поле вводу та оберіть <b>«Вставити»</b>.</p>
-    <a class="ig-warn-open" id="appWarnLink" href="#" target="_blank" rel="noopener" onclick="appWarnClose()">
+    <a class="ig-warn-open" id="appWarnLink" href="#" target="_blank" rel="noopener" onclick="appWarnClose(); appWarnFallback(this)">
       Відкрити <span id="appWarnApp2">застосунок</span> →
     </a>
     <button class="ig-warn-cancel" onclick="appWarnClose()">Скасувати</button>
@@ -852,17 +852,43 @@ function bldSend() {
 // iOS Safari ONLY opens apps if user taps a real <a href> — no JS tricks work
 function showAppWarning(app) {
   var isIg = (app === 'instagram');
-  var url   = isIg ? 'https://ig.me/m/kvi_tka24' : 'viber://chat?number=%2B380970938241';
+  // Viber: https link works on all platforms including iOS
+  // Instagram: deep link opens app directly; fallback to profile if app not installed
+  var url   = isIg ? 'instagram://user?username=kvi_tka24' : 'https://viber.com/+380970938241';
   document.getElementById('appWarnIco').textContent  = isIg ? '📸' : '📱';
   document.getElementById('appWarnApp').textContent  = isIg ? 'Instagram Direct' : 'Viber';
   document.getElementById('appWarnApp2').textContent = isIg ? 'Instagram Direct' : 'Viber';
-  // Set real href on the anchor — user tap will open the app natively on iOS
-  document.getElementById('appWarnLink').href = url;
+  // For Instagram: try app deep link, with web fallback
+  // For Viber: https link works everywhere
+  if (isIg) {
+    // Try to open app; if not installed iOS will show error — add fallback
+    document.getElementById('appWarnLink').href = 'instagram://user?username=kvi_tka24';
+    document.getElementById('appWarnLink').setAttribute('data-fallback', 'https://www.instagram.com/kvi_tka24/');
+  } else {
+    document.getElementById('appWarnLink').href = url;
+    document.getElementById('appWarnLink').removeAttribute('data-fallback');
+  }
   document.getElementById('appWarn').classList.add('on');
 }
 
 function appWarnClose() {
   document.getElementById('appWarn').classList.remove('on');
+}
+
+
+// If Instagram app not installed — fallback to web after 2s
+function appWarnFallback(a) {
+  var fb = a.getAttribute('data-fallback');
+  if (!fb) return;
+  // If app didn't open within 2s, redirect to web
+  var t = setTimeout(function() {
+    window.location.href = fb;
+  }, 2000);
+  // Cancel fallback if page hides (app opened)
+  window.addEventListener('pagehide', function() { clearTimeout(t); }, {once: true});
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) clearTimeout(t);
+  }, {once: true});
 }
 
 </script>
