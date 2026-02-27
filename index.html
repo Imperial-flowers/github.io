@@ -280,7 +280,7 @@ footer { background:var(--dark); color:rgba(255,255,255,.5); text-align:center; 
   <div class="hero-card">
     <h1 class="hero-title">Ексклюзивні квіти для ваших особливих моментів</h1>
     <p class="hero-sub">Кожен букет — це витвір мистецтва, створений з любов'ю та увагою до найменших деталей.</p>
-    <button class="btn-dark" onclick="scrollTo('bouquets')">Переглянути букети</button>
+    <button class="btn-dark" onclick="goTo('bouquets')">Переглянути букети</button>
   </div>
 </section>
 
@@ -516,7 +516,7 @@ window.addEventListener('DOMContentLoaded', function() {
 // ═══════════════════════════════
 // SCROLL HELPER
 // ═══════════════════════════════
-function scrollTo(id) {
+function goTo(id) {
   var el = document.getElementById(id);
   if (el) el.scrollIntoView({behavior: 'smooth'});
 }
@@ -550,7 +550,7 @@ document.addEventListener('click', function(e) {
 function ddGo(id) {
   ddClose();
   if (id === 'bouquets' || id === 'catalog') {
-    setTimeout(function() { scrollTo(id); }, 80);
+    setTimeout(function() { goTo(id); }, 80);
   } else {
     // Open accordion and scroll to it
     setTimeout(function() {
