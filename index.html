@@ -341,7 +341,7 @@ footer { background:var(--dark); color:rgba(255,255,255,.5); text-align:center; 
         <div class="acc-body"><div class="pg" id="pg-sumochky"></div></div>
       </div>
       <div class="acc-block" id="acc-troyandy">
-        <button class="acc-head" onclick="accToggle('troyandy')"><span class="acc-ico">🌹</span><span class="acc-lbl">Троянди</span><span class="acc-num">9</span><span class="acc-arr">▾</span></button>
+        <button class="acc-head" onclick="accToggle('troyandy')"><span class="acc-ico">🌹</span><span class="acc-lbl">Троянди</span><span class="acc-num">14</span><span class="acc-arr">▾</span></button>
         <div class="acc-body"><div class="pg" id="pg-troyandy"></div></div>
       </div>
       <div class="acc-block" id="acc-khrizantema">
@@ -512,7 +512,7 @@ window.addEventListener('DOMContentLoaded', function() {
   var bq = document.getElementById('pgBouquets');
   if (bq) {
     var h = '';
-    for (var i = 1; i <= 28; i++) {
+    for (var i = 1; i <= 31; i++) {
       h += makeCard('Букет #' + i, 'images/images1/' + i + '.jpg');
     }
     bq.innerHTML = h;
